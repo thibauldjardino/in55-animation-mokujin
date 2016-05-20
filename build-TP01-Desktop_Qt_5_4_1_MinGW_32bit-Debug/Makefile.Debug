@@ -167,6 +167,7 @@ compiler_clean:
 
 obj/GlFramework.o: ../Common/GlFramework.cpp ../Common/GlFramework.h \
 		../Common/AbstractFramework.h \
+		../glew-mingw/include/GL/glew.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QLinkedList \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlinkedlist.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiterator.h \
@@ -297,6 +298,7 @@ obj/GlFramework.o: ../Common/GlFramework.cpp ../Common/GlFramework.h \
 obj/GlWindow.o: ../Common/GlWindow.cpp ../Common/GlWindow.h \
 		../Common/GlFramework.h \
 		../Common/AbstractFramework.h \
+		../glew-mingw/include/GL/glew.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QLinkedList \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlinkedlist.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiterator.h \
@@ -428,10 +430,12 @@ obj/Object3D.o: ../Common/Object3D.cpp
 
 obj/Basis.o: ../Common/Shapes/Basis.cpp ../Common/Shapes/Basis.h \
 		../Common/Object3D.h \
-		../Common/AbstractFramework.h
+		../Common/AbstractFramework.h \
+		../glew-mingw/include/GL/glew.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj\Basis.o ..\Common\Shapes\Basis.cpp
 
 obj/Shape.o: ../Common/Shapes/Shape.cpp ../Common/Shapes/Shape.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Types.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h \
@@ -440,6 +444,7 @@ obj/Shape.o: ../Common/Shapes/Shape.cpp ../Common/Shapes/Shape.h \
 
 obj/ParametricShape.o: ../Common/Shapes/ParametricShape.cpp ../Common/Shapes/ParametricShape.h \
 		../Common/Shapes/Shape.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Types.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h \
@@ -449,6 +454,7 @@ obj/ParametricShape.o: ../Common/Shapes/ParametricShape.cpp ../Common/Shapes/Par
 obj/Cubes.o: ../Common/Shapes/Cubes.cpp ../Common/Shapes/Cubes.h \
 		../Common/Shapes/ParametricShape.h \
 		../Common/Shapes/Shape.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Types.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h
@@ -457,6 +463,7 @@ obj/Cubes.o: ../Common/Shapes/Cubes.cpp ../Common/Shapes/Cubes.h \
 obj/Cylinder.o: ../Common/Shapes/Cylinder.cpp ../Common/Shapes/Cylinder.h \
 		../Common/Shapes/ParametricShape.h \
 		../Common/Shapes/Shape.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Types.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h
@@ -465,6 +472,7 @@ obj/Cylinder.o: ../Common/Shapes/Cylinder.cpp ../Common/Shapes/Cylinder.h \
 obj/Pyramid.o: ../Common/Shapes/Pyramid.cpp ../Common/Shapes/Pyramid.h \
 		../Common/Shapes/ParametricShape.h \
 		../Common/Shapes/Shape.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Types.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h
@@ -473,6 +481,7 @@ obj/Pyramid.o: ../Common/Shapes/Pyramid.cpp ../Common/Shapes/Pyramid.h \
 obj/Star.o: ../Common/Shapes/Star.cpp ../Common/Shapes/Star.h \
 		../Common/Shapes/ParametricShape.h \
 		../Common/Shapes/Shape.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Types.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h
@@ -481,6 +490,7 @@ obj/Star.o: ../Common/Shapes/Star.cpp ../Common/Shapes/Star.h \
 obj/TP01.o: ../TP01/src/TP01.cpp ../Common/Shapes/Basis.h \
 		../Common/Object3D.h \
 		../Common/AbstractFramework.h \
+		../glew-mingw/include/GL/glew.h \
 		../Common/Shapes/Cubes.h \
 		../Common/Shapes/ParametricShape.h \
 		../Common/Shapes/Shape.h \
@@ -494,6 +504,7 @@ obj/main.o: ../TP01/src/main.cpp ../TP01/src/TP01.h \
 		../Common/GlWindow.h \
 		../Common/GlFramework.h \
 		../Common/AbstractFramework.h \
+		../glew-mingw/include/GL/glew.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QLinkedList \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlinkedlist.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiterator.h \
