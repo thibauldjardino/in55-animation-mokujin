@@ -31,8 +31,6 @@ class Quaternion
 		void normalize ();
 		
 		void setRotationMatrix (float32* mat);
-
-    private:
 	
         float32 w;
         float32 x;

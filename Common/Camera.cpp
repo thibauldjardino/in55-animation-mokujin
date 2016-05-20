@@ -37,8 +37,8 @@ void Camera::translate (float32 x, float32 y, float32 z) {
 
 void Camera::translateX (float32 shift)  {
 	
-	Quaternion axis = new Quaternion(0,1,0,0);
-	Quaternion translation = this->m_orientation*axis*shift;
+	Quaternion *axis = new Quaternion(0,1,0,0);
+	Quaternion *translation = this->m_orientation*axis*shift;
 	
 	Vec3 transVect = new Vec3(translation.x,translation.y,translation.z);
 	

@@ -10,6 +10,8 @@
 class Camera 
 {
     public:
+        Camera();
+
 		void translate (float32 x, float32 y, float32 z);
 		void translateX (float32 shift);
 		void translateY (float32 shift);
@@ -34,13 +36,13 @@ class Camera
 		void buildViewMatrix();
 		void buildProjectionMatrix();
 	
-		Vec3 m_position;
-		Quaternion m_orientation;
+        Vec3 *m_position;
+        Quaternion *m_orientation;
 		GLMatrix m_ViewMatrix;
 		GLMatrix m_ProjectionMatrix;
 		
 		float32 aspectRatio;
-		float32 nearPlane;
+        float32 nearPlane;
 		float32 farPlane;
 		float32 fov;
 };

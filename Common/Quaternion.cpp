@@ -26,7 +26,7 @@ Quaternion::Quaternion() {
  * in parameter
  * Parameter : q, the quaternion to be copied
  */
-Quaternion::Quaternion(const Quaternion & q); {
+Quaternion::Quaternion(const Quaternion & q) {
 	
 	this->w = q.w;
     this->x = q.x;
@@ -52,20 +52,20 @@ Quaternion::Quaternion(float32 w2, float32 x2, float32 y2, float32 z2) {
  */
 Quaternion Quaternion::operator* (const Quaternion & q) {
 	
-	new_w = this->w * q.w - this->x * q.x - this->y * q.y - this->z * q.z;
+    float32 new_w = this->w * q.w - this->x * q.x - this->y * q.y - this->z * q.z;
 	
-	new_x = this->w * q.x + q.w * this->x + this->y * q.z - this->z * q.y;
+    float32 new_x = this->w * q.x + q.w * this->x + this->y * q.z - this->z * q.y;
 	
-	new_y = this->w * q.y + q.w * this->y + q.x * this->z - q.z * this->x;
+    float32 new_y = this->w * q.y + q.w * this->y + q.x * this->z - q.z * this->x;
 	
-	new_z = this->w * q.z + q.w * this->z + this->x * q.y - this->y * q.x;
+    float32 new_z = this->w * q.z + q.w * this->z + this->x * q.y - this->y * q.x;
 
-	Quaternion result = new Quaternion(new_w, new_x, new_y, new_z);
+    Quaternion *result = new Quaternion(new_w, new_x, new_y, new_z);
 	
 	// Problème à résoudre ici, si on normalize, quand on fait qr.qp.qr-1 ça normalise le quaternion intermédiaire
 	//result->normalize();
 	
-	return result;
+    return *result;
 }
 
 /**
@@ -73,14 +73,14 @@ Quaternion Quaternion::operator* (const Quaternion & q) {
  */
 Vec3 Quaternion::operator* (const Vec3 & v) {
 
-	Quaternion point = new Quaternion(0.0f, v.x, v.y, v.z);
+    Quaternion *point = new Quaternion(0.0f, v.x, v.y, v.z);
 	
-	Quaternion rotation = new Quaternion(this);
-	rotation->normalize
+    Quaternion *rotation = new Quaternion(*this);
+    rotation->normalize();
 	Quaternion rotation_conjuguate = rotation->conjuguate();
-	Quaternion rotated = rotation * point * rotation_conjuguate;
+    Quaternion rotated = (*rotation) * (*point) * rotation_conjuguate;
 	
-	return new Vec3(rotated.x, rotated.y, rotated.z);
+    return *(new Vec3(rotated.x, rotated.y, rotated.z));
 }
 
 /**
@@ -88,7 +88,7 @@ Vec3 Quaternion::operator* (const Vec3 & v) {
  */
 Quaternion Quaternion::operator* (float32 f) {
 	
-	return new Quaternion(this->w*f, this->x*f, this->y*f, this->z*f);
+    return *(new Quaternion(this->w*f, this->x*f, this->y*f, this->z*f));
 }
 
 /**
@@ -96,8 +96,8 @@ Quaternion Quaternion::operator* (float32 f) {
  */
 Quaternion& Quaternion::operator*= (const Quaternion & q) {
 	
-	Quaternion result = this*q;
-	result->normalize();
+    Quaternion result = (*this)*q;
+    result.normalize();
 	
 	this->set(result.w, result.x, result.y, result.z);
 	
@@ -109,17 +109,17 @@ Quaternion& Quaternion::operator*= (const Quaternion & q) {
  */
 Quaternion Quaternion::operator+ (const Quaternion & q) {
 	
-	new_w = this->w + q->w;
+    float32 new_w = this->w + q.w;
 	
-	new_x = this->x + q->x;
+    float32 new_x = this->x + q.x;
 	
-	new_y = this->y + q->y;
+    float32 new_y = this->y + q.y;
 	
-	new_z = this->z + q->z;
+    float32 new_z = this->z + q.z;
 
-	Quaternion result = new Quaternion(new_w, new_x, new_y, new_z);
+    Quaternion *result = new Quaternion(new_w, new_x, new_y, new_z);
 	
-	return result;
+    return *result;
 }
 
 /**
@@ -127,7 +127,7 @@ Quaternion Quaternion::operator+ (const Quaternion & q) {
  */
 float32 Quaternion::dot (const Quaternion & q) {
 	
-	return this->w * q->w + this->x * q->x + this->y * q->y + this->z * q->z;
+    return this->w * q.w + this->x * q.x + this->y * q.y + this->z * q.z;
 }
 
 /**
@@ -135,10 +135,10 @@ float32 Quaternion::dot (const Quaternion & q) {
  */
 void Quaternion::set (float32 w, float32 x, float32 y, float32 z) {
 	
-	this->w = q->w;
-    this->x = q->x;
-    this->y = q->y;
-    this->z = q->z;	
+    this->w = w;
+    this->x = x;
+    this->y = y;
+    this->z = z;
 }
 
 /**
@@ -146,7 +146,7 @@ void Quaternion::set (float32 w, float32 x, float32 y, float32 z) {
  */
 void Quaternion::setFromAxis (float32 angle, float32 ax, float32 ay, float32 az) {
 	
-	Vec3 axis = new Vec3(ax,ay,az);
+    Vec3 *axis = new Vec3(ax,ay,az);
 	axis->normalize();
 	
 	this->w = cos(angle/2.0f);
@@ -160,24 +160,26 @@ void Quaternion::setFromAxis (float32 angle, float32 ax, float32 ay, float32 az)
  */
 Quaternion Quaternion::conjuguate () {
 	
-	return new Quaternion(this->w, -this->x, -this->y, -this->z);
+    return *(new Quaternion(this->w, -this->x, -this->y, -this->z));
 }
 
 /**
  * 
  */
-Quaternion slerp (const Quaternion & q1, const Quaternion & q2, float32 t) {
+Quaternion Quaternion::slerp (const Quaternion & q1, const Quaternion & q2, float32 t) {
 	
-	q1.normalize();
-	q2.normalize();
+    Quaternion *temp1 = new Quaternion(q1);
+    Quaternion *temp2 = new Quaternion(q2);
 	
+    temp1->normalize();
+    temp2->normalize();
 	Quaternion interpolation;
 	
-	float32 dotProduct = dot(q1,q2);
+    float32 dotProduct = temp1->dot(*temp2);
 	float32 theta = acos(dotProduct);
 	float32 sinTheta = sqrt(1- dotProduct*dotProduct);
 	
-	interpolation = q1*(sin(theta*(1-t))/sinTheta) + q2*(sin(theta*t)/sinTheta);
+    interpolation = (*temp1)*(sin(theta*(1-t))/sinTheta) + (*temp2)*(sin(theta*t)/sinTheta);
 	
 	return interpolation;
 }
@@ -185,7 +187,7 @@ Quaternion slerp (const Quaternion & q1, const Quaternion & q2, float32 t) {
 /**
  * 
  */
-void Quaternion::normalize () {
+void Quaternion::normalize() {
 	
 	float32 norm = sqrt(this->w*this->w + this->x*this->x + this->y*this->y + this->z*this->z);
 	
@@ -218,7 +220,7 @@ void Quaternion::setRotationMatrix (float32* mat) {
 		new_y = (mat[8] - mat[2])/(4*new_w);
 		new_z = (mat[1] - mat[4])/(4*new_w);
 	} else {
-		max = fmaxf(fmaxf(mat[0],mat[5]),mat[10]);
+        float32 max = fmaxf(fmaxf(mat[0],mat[5]),mat[10]);
 		
 		if(max==mat[0]) {
 			new_x = sqrt(mat[0] - mat[5] - mat[10] +1)/2.0f;
@@ -238,5 +240,5 @@ void Quaternion::setRotationMatrix (float32* mat) {
 		}	
 	}
 	
-	this.set(new_w,new_x,new_y,new_z);
+    this->set(new_w,new_x,new_y,new_z);
 }
