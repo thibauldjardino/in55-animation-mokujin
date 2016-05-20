@@ -14,9 +14,12 @@ using namespace std;
 
 GLfloat angle1 = 30.0f;
 GLfloat angle2 = 20.0f;
+GLfloat translate1 = 0.0f;
+GLfloat translate2 = 0.0f;
+GLfloat translate3 = 0.0f;
 
 const GLfloat g_AngleSpeed = 10.0f;
-
+const GLfloat g_TranslationSpeed = 1.0f;
 
 Basis* basis;
 Pyramid* pyr;
@@ -82,8 +85,9 @@ TP01::render()
 
 	// Rendu des objets
 	pushMatrix();
-		rotate( angle1, 0, 1, 0 );
-		rotate( angle2, 1, 0, 0 );
+        rotate( angle1, 0, 1, 0 );
+        rotate( angle2, 1, 0, 0 );
+        translate(translate1,translate2,translate3);
 
         basis->draw();
 
@@ -120,23 +124,31 @@ TP01::keyPressEvent( QKeyEvent* event )
 			break;
 
 		case Qt::Key_Left:
-			angle1 -= g_AngleSpeed;
+            camera->translateX(g_TranslationSpeed);
+            translate1 += g_TranslationSpeed;
+//			angle1 -= g_AngleSpeed;
 			break;
 
 		case Qt::Key_Right:
-			angle1 += g_AngleSpeed;
+        camera->translateX(-g_TranslationSpeed);
+        translate1 -= g_TranslationSpeed;
+//			angle1 += g_AngleSpeed;
 			break;
 
 		case Qt::Key_Up:
-			angle2 -= g_AngleSpeed;
+        camera->translateY(g_TranslationSpeed);
+        translate3 += g_TranslationSpeed;
+//			angle2 -= g_AngleSpeed;
 			break;
 
 		case Qt::Key_Down:
-			angle2 += g_AngleSpeed;
+        camera->translateY(-g_TranslationSpeed);
+        translate3 -= g_TranslationSpeed;
+//			angle2 += g_AngleSpeed;
 			break;
 
 		case Qt::Key_R:
-			angle1 = angle2 = 0.0f;
+//			angle1 = angle2 = 0.0f;
 			break;
 	}
 }
