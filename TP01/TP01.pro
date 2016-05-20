@@ -27,6 +27,8 @@ HEADERS += \
     ../Common/Shapes/Cylinder.h \
     ../Common/Shapes/Pyramid.h \
     ../Common/Shapes/Star.h \
+    ../Common/Quaternion.h \
+    ../Common/Camera.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -42,3 +44,5 @@ SOURCES += \
     ../Common/Shapes/Star.cpp \
     src/TP01.cpp \
     src/main.cpp \
+    ../Common/Quaternion.cpp \
+    ../Common/Camera.cpp
