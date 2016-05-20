@@ -38,41 +38,41 @@ void Camera::translate (float32 x, float32 y, float32 z) {
 void Camera::translateX (float32 shift)  {
 	
 	Quaternion *axis = new Quaternion(0,1,0,0);
-	Quaternion *translation = this->m_orientation*axis*shift;
+    Quaternion translation = (*this->m_orientation)*(*axis)*shift;
 	
-	Vec3 transVect = new Vec3(translation.x,translation.y,translation.z);
+    Vec3 *transVect = new Vec3(translation.x,translation.y,translation.z);
 	
-	this->m_position += transVect;
+    (*this->m_position) += *transVect;
 }
 
 void Camera::translateY (float32 shift)  {
 	
-	Quaternion axis = new Quaternion(0,0,1,0);
-	Quaternion translation = this->m_orientation*axis*shift;
-	
-	Vec3 transVect = new Vec3(translation.x,translation.y,translation.z);
-	
-	this->m_position += transVect;
+    Quaternion *axis = new Quaternion(0,0,1,0);
+    Quaternion translation = (*this->m_orientation)*(*axis)*shift;
+
+    Vec3 *transVect = new Vec3(translation.x,translation.y,translation.z);
+
+    (*this->m_position) += *transVect;
 	
 }
 
 void Camera::translateZ (float32 shift)  {
 	
-	Quaternion axis = new Quaternion(0,0,0,1);
-	Quaternion translation = this->m_orientation*axis*shift;
-	
-	Vec3 transVect = new Vec3(translation.x,translation.y,translation.z);
-	
-	this->m_position += transVect;
+    Quaternion *axis = new Quaternion(0,0,0,1);
+    Quaternion translation = (*this->m_orientation)*(*axis)*shift;
+
+    Vec3 *transVect = new Vec3(translation.x,translation.y,translation.z);
+
+    (*this->m_position) += *transVect;
 	
 }
 
 void Camera::rotate (float32 angle, float32 ax, float32 ay, float32 az) {
 	
-	Quaternion rotation = new Quaternion();
-	rotation.setFromAxis(angle,ax,ay,az);
+    Quaternion *rotation = new Quaternion();
+    rotation->setFromAxis(angle,ax,ay,az);
 	
-	this->m_orientation = rotation*this->m_orientation;	
+    (*this->m_orientation) = (*rotation)*(*this->m_orientation);
 }
 
 void Camera::rotateX (float32 angle)  {
@@ -129,31 +129,31 @@ const GLMatrix& Camera::getProjectionMatrix() {
 
 void Camera::buildViewMatrix() {
 	
-	Vec3 axis3 = new Vec3(this->m_orientation.x,this->m_orientation.y,this->m_orientation.z);
+    Vec3 *axis1 = new Vec3(this->m_orientation->x,this->m_orientation->y,this->m_orientation->z);
 
-	Vec3 axis2 = new Vec3(axis1.y,-axis1.x,0);
+    Vec3 *axis2 = new Vec3(axis1->y,-axis1->x,0);
 	
-	Vec3 axis1 = new Vec3(this->m_orientation.x,this->m_orientation.y,this->m_orientation.z);
-	
+    Vec3 *axis3 = new Vec3(this->m_orientation->x,this->m_orientation->y,this->m_orientation->z);
+
 	this->m_ViewMatrix.setIdentity();
 	
-	this->m_ViewMatrix.data[0] = axis1.x;
-	this->m_ViewMatrix.data[1] = axis1.y;
-	this->m_ViewMatrix.data[2] = axis1.z;
+    this->m_ViewMatrix.data[0] = axis1->x;
+    this->m_ViewMatrix.data[1] = axis1->y;
+    this->m_ViewMatrix.data[2] = axis1->z;
 	this->m_ViewMatrix.data[3] = 0.0f;
-	this->m_ViewMatrix.data[4] = axis2.x;
-	this->m_ViewMatrix.data[5] = axis2.y;
-	this->m_ViewMatrix.data[6] = axis2.z;
+    this->m_ViewMatrix.data[4] = axis2->x;
+    this->m_ViewMatrix.data[5] = axis2->y;
+    this->m_ViewMatrix.data[6] = axis2->z;
 	this->m_ViewMatrix.data[7] = 0.0f;
 	
-	this->m_ViewMatrix.data[8] = axis3.x;
-	this->m_ViewMatrix.data[9] = axis3.y;
-	this->m_ViewMatrix.data[10] = axis3.z;
+    this->m_ViewMatrix.data[8] = axis3->x;
+    this->m_ViewMatrix.data[9] = axis3->y;
+    this->m_ViewMatrix.data[10] = axis3->z;
 	this->m_ViewMatrix.data[11] = 0.0f;
 	
-	this->m_ViewMatrix.data[12] = -(axis1.x*m_position.x + axis2.x*m_position.y + axis3.x*m_position.z);
-	this->m_ViewMatrix.data[13] = -(axis1.y*m_position.x + axis2.y*m_position.y + axis3.y*m_position.z);
-	this->m_ViewMatrix.data[14] = -(axis1.z*m_position.x + axis2.z*m_position.y + axis3.z*m_position.z);
+    this->m_ViewMatrix.data[12] = -(axis1->x*m_position->x + axis2->x*m_position->y + axis3->x*m_position->z);
+    this->m_ViewMatrix.data[13] = -(axis1->y*m_position->x + axis2->y*m_position->y + axis3->y*m_position->z);
+    this->m_ViewMatrix.data[14] = -(axis1->z*m_position->x + axis2->z*m_position->y + axis3->z*m_position->z);
 	this->m_ViewMatrix.data[15] = 1.0f;	
 }
 
