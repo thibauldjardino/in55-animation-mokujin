@@ -6,7 +6,7 @@
 #include "Shapes/Pyramid.h"
 #include "Shapes/Cylinder.h"
 #include "Shapes/Star.h"
-
+#include "Camera.h"
 #include <iostream>
 
 using namespace std;
@@ -23,7 +23,7 @@ Pyramid* pyr;
 Cylinder* cyl;
 Star* star;
 MultipleColorCube* cube;
-
+Camera *camera;
 
 TP01::TP01()
 {
@@ -34,6 +34,7 @@ TP01::TP01()
     pyr = new Pyramid( 5, 2.0, 10.0 );
     cyl = new Cylinder( 32, 1.5, 0.0, 10.0 );
     cube = new MultipleColorCube();
+    camera = new Camera();
 }
 
 
@@ -44,6 +45,7 @@ TP01::~TP01()
     delete pyr;
     delete cyl;
     delete cube;
+    delete camera;
 }
 
 
@@ -75,7 +77,7 @@ void
 TP01::render()
 {
 	// Initialisation de la caméra
-	lookAt( 0, 5, 30, 0, 0, 0 );
+    lookAt(camera->m_position->x, camera->m_position->y, camera->m_position->z, camera->m_orientation->x, camera->m_orientation->y, camera->m_orientation->z );
 
 
 	// Rendu des objets

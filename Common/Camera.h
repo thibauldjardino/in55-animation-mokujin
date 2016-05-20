@@ -32,7 +32,6 @@ class Camera
 	   
 		const GLMatrix& getProjectionMatrix();
 		
-    private:
 		void buildViewMatrix();
 		void buildProjectionMatrix();
 	

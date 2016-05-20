@@ -15,8 +15,8 @@
  */
 Camera::Camera() {
 	
-	this->m_position = new Vec3(0,0,0);
-	this->m_orientation = new Quaternion(0,0,0,1);
+    this->m_position = new Vec3(15,15,15);
+    this->m_orientation = new Quaternion(0,0,0,0);
 	this->m_ViewMatrix.setIdentity();
 	this->m_ProjectionMatrix.setIdentity();
 	this->aspectRatio = 1; //?

@@ -86,7 +86,8 @@ DIST          =  ..\Common\GlFramework.h \
 		..\Common\Shapes\Pyramid.h \
 		..\Common\Shapes\Star.h \
 		..\Common\Quaternion.h \
-		..\Common\Camera.h ..\Common\GlFramework.cpp \
+		..\Common\Camera.h \
+		..\TP01\src\TP01.h ..\Common\GlFramework.cpp \
 		..\Common\GlWindow.cpp \
 		..\Common\LF_String.cpp \
 		..\Common\Object3D.cpp \
