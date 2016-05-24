@@ -6,11 +6,12 @@
 #include "Quaternion.h"
 #include "GlFramework.h"
 #include <math.h>
+#include <iostream>
 
 class Camera 
 {
     public:
-        Camera();
+        Camera(float32 posX, float32 posY, float32 posZ);
 
 		void translate (float32 x, float32 y, float32 z);
 		void translateX (float32 shift);

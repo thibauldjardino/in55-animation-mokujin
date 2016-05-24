@@ -7,6 +7,7 @@
 #include "Shapes/Cylinder.h"
 #include "Shapes/Star.h"
 #include "Camera.h"
+#include "Quaternion.h"
 #include <iostream>
 
 using namespace std;
@@ -18,8 +19,8 @@ GLfloat translate1 = 0.0f;
 GLfloat translate2 = 0.0f;
 GLfloat translate3 = 0.0f;
 
-const GLfloat g_AngleSpeed = 10.0f;
-const GLfloat g_TranslationSpeed = 1.0f;
+const GLfloat g_AngleSpeed = 0.1f;
+const GLfloat g_TranslationSpeed = 0.1f;
 
 Basis* basis;
 Pyramid* pyr;
@@ -30,14 +31,23 @@ Camera *camera;
 
 TP01::TP01()
 {
-	setWindowTitle(trUtf8("IN55-TP01"));
+    setWindowTitle(trUtf8("IN55-TP01"));
 
     basis = new Basis( 10.0 );
     star = new Star( 6, 1.0, 1.4, 1.0 );
     pyr = new Pyramid( 5, 2.0, 10.0 );
     cyl = new Cylinder( 32, 1.5, 0.0, 10.0 );
     cube = new MultipleColorCube();
-    camera = new Camera();
+    camera = new Camera(15,15,15);
+
+    Quaternion *q1 = new Quaternion(0,1,1,1);
+    Quaternion *q2 = new Quaternion(0,1,0,0);
+
+    Quaternion test = (*q2)*(*q1)*3.0;
+
+    std::cout << test.w << " " << test.x << " " << test.y << " " << test.z << " " << endl;
+
+
 }
 
 
@@ -55,12 +65,12 @@ TP01::~TP01()
 bool
 TP01::initializeObjects()
 {
-	// Fond gris
-	glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
-	glEnable( GL_DEPTH_TEST );
+    // Fond gris
+    glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
+    glEnable( GL_DEPTH_TEST );
 
-	// Chargement des shaders
-	createShader( "Shaders/color" );
+    // Chargement des shaders
+    createShader( "Shaders/color" );
 
     cout << "Shader color: ";
     if (useShader( "color" ))
@@ -72,44 +82,44 @@ TP01::initializeObjects()
         cout << "NOT Loaded!" << endl;
     }
 
-	return true;
+    return true;
 }
 
 
 void
 TP01::render()
 {
-	// Initialisation de la caméra
-    lookAt(camera->m_position->x, camera->m_position->y, camera->m_position->z, camera->m_orientation->x, camera->m_orientation->y, camera->m_orientation->z );
+    // Initialisation de la caméra
+    lookAt(camera->m_position->x, camera->m_position->y, camera->m_position->z, camera->m_orientation->x+camera->m_position->x, camera->m_orientation->y+camera->m_position->y, camera->m_orientation->z+camera->m_position->z );
 
 
-	// Rendu des objets
-	pushMatrix();
-        rotate( angle1, 0, 1, 0 );
-        rotate( angle2, 1, 0, 0 );
-        translate(translate1,translate2,translate3);
+    // Rendu des objets
+    pushMatrix();
+    rotate( angle1, 0, 1, 0 );
+    rotate( angle2, 1, 0, 0 );
+    // translate(translate1,translate2,translate3);
 
-        basis->draw();
+    basis->draw();
 
-        pushMatrix();
-        translate( -10.0, 0, 0 );
-        star->draw();
-        popMatrix();
+    pushMatrix();
+    translate( -10.0, 0, 0 );
+    star->draw();
+    popMatrix();
 
-        pushMatrix();
-        translate( 10.0, 0, 0 );
-        pyr->draw();
-        popMatrix();
+    pushMatrix();
+    translate( 10.0, 0, 0 );
+    pyr->draw();
+    popMatrix();
 
-        pushMatrix();
-        translate( -5.0, 0, 0 );
-        cyl->draw();
-        popMatrix();
+    pushMatrix();
+    translate( -5.0, 0, 0 );
+    cyl->draw();
+    popMatrix();
 
-        pushMatrix();
-        translate( 5.0, 0, 0 );
-        cube->draw();
-        popMatrix();
+    pushMatrix();
+    translate( 5.0, 0, 0 );
+    cube->draw();
+    popMatrix();
     popMatrix();
 }
 
@@ -117,38 +127,56 @@ TP01::render()
 void
 TP01::keyPressEvent( QKeyEvent* event )
 {
-	switch( event->key())
-	{
-		case Qt::Key_Escape:
-			close();
-			break;
+    switch( event->key())
+    {
+    case Qt::Key_Escape:
+        close();
+        break;
 
-		case Qt::Key_Left:
-            camera->translateX(g_TranslationSpeed);
-            translate1 += g_TranslationSpeed;
-//			angle1 -= g_AngleSpeed;
-			break;
-
-		case Qt::Key_Right:
+    case Qt::Key_Left:
         camera->translateX(-g_TranslationSpeed);
-        translate1 -= g_TranslationSpeed;
-//			angle1 += g_AngleSpeed;
-			break;
+        break;
 
-		case Qt::Key_Up:
+    case Qt::Key_Right:
+        camera->translateX(g_TranslationSpeed);
+
+        break;
+
+    case Qt::Key_Up:
         camera->translateY(g_TranslationSpeed);
-        translate3 += g_TranslationSpeed;
-//			angle2 -= g_AngleSpeed;
-			break;
+        break;
 
-		case Qt::Key_Down:
+    case Qt::Key_Down:
         camera->translateY(-g_TranslationSpeed);
-        translate3 -= g_TranslationSpeed;
-//			angle2 += g_AngleSpeed;
-			break;
+        break;
 
-		case Qt::Key_R:
-//			angle1 = angle2 = 0.0f;
-			break;
-	}
+    case Qt::Key_Z:
+        camera->translateZ(-g_TranslationSpeed);
+        break;
+
+    case Qt::Key_S:
+        camera->translateZ(g_TranslationSpeed);
+        break;
+
+    case Qt::Key_R:
+        //			angle1 = angle2 = 0.0f;
+        break;
+
+    case Qt::Key_O:
+        camera->rotateX(g_AngleSpeed);
+        break;
+
+    case Qt::Key_K:
+       camera->rotateX(-g_AngleSpeed);
+        break;
+
+    case Qt::Key_L:
+        camera->rotateY(-g_AngleSpeed);
+        break;
+
+    case Qt::Key_M:
+        camera->rotateY(g_AngleSpeed);
+        break;
+
+    }
 }

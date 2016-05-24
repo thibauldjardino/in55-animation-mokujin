@@ -2,6 +2,7 @@
 #define Quaternion_h
 
 #include "Vectors.h"
+#include "GlFramework.h"
 #include "Types.h"
 #include <math.h>
 
@@ -30,7 +31,7 @@ class Quaternion
 		
 		void normalize ();
 		
-		void setRotationMatrix (float32* mat);
+        void setRotationMatrix (const float32* mat);
 	
         float32 w;
         float32 x;

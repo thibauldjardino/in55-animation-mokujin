@@ -205,7 +205,7 @@ void Quaternion::normalize() {
 /**
  * We suppose that mat is 4x4 dimension
  */
-void Quaternion::setRotationMatrix (float32* mat) {
+void Quaternion::setRotationMatrix (const float32* mat) {
 	
 	float32 trace = mat[0] + mat[5] + mat[10];
 	float32 new_w;
