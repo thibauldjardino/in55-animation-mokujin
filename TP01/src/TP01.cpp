@@ -40,14 +40,7 @@ TP01::TP01()
     cube = new MultipleColorCube();
     camera = new Camera(15,15,15);
 
-    Quaternion *q1 = new Quaternion(0,1,1,1);
-    Quaternion *q2 = new Quaternion(0,1,0,0);
-
-    Quaternion test = (*q2)*(*q1)*3.0;
-
-    std::cout << test.w << " " << test.x << " " << test.y << " " << test.z << " " << endl;
-
-
+    std::cout << camera->m_forwardOrientation->w << " " << camera->m_forwardOrientation->x << " " << camera->m_forwardOrientation->y << " " << camera->m_forwardOrientation->z << " " << std::endl;
 }
 
 
@@ -89,8 +82,10 @@ TP01::initializeObjects()
 void
 TP01::render()
 {
+   std::cout << camera->m_forwardOrientation->w << " " << camera->m_forwardOrientation->x << " " << camera->m_forwardOrientation->y << " " << camera->m_forwardOrientation->z << " " << std::endl;
+
     // Initialisation de la caméra
-    lookAt(camera->m_position->x, camera->m_position->y, camera->m_position->z, camera->m_orientation->x+camera->m_position->x, camera->m_orientation->y+camera->m_position->y, camera->m_orientation->z+camera->m_position->z );
+    lookAt(camera->m_position->x, camera->m_position->y, camera->m_position->z, camera->m_forwardOrientation->x+camera->m_position->x, camera->m_forwardOrientation->y+camera->m_position->y, camera->m_forwardOrientation->z+camera->m_position->z, camera->m_upOrientation->x, camera->m_upOrientation->y, camera->m_upOrientation->z );
 
 
     // Rendu des objets
@@ -176,6 +171,14 @@ TP01::keyPressEvent( QKeyEvent* event )
 
     case Qt::Key_M:
         camera->rotateY(g_AngleSpeed);
+        break;
+
+    case Qt::Key_I:
+        camera->rotateZ(-g_AngleSpeed);
+        break;
+
+    case Qt::Key_P:
+        camera->rotateZ(g_AngleSpeed);
         break;
 
     }

@@ -12,12 +12,17 @@
 
 
 /** Constructor.
- * Initializes the camera to canonic basis
+ * Initializes the camera with position in parameter
  */
 Camera::Camera(float32 posX, float32 posY, float32 posZ) {
 	
     this->m_position = new Vec3(posX,posY,posZ);
-    this->m_orientation = new Quaternion(0,-posX,-posY,-posZ);
+
+    if(posX*posY*posZ==0)
+        this->m_forwardOrientation = new Quaternion(0,-15,-15,-15);
+    else
+        this->m_forwardOrientation = new Quaternion(0,-posX,-posY,-posZ);
+    this->m_upOrientation = new Quaternion(0,-posY,posX,0);
 	this->m_ViewMatrix.setIdentity();
 	this->m_ProjectionMatrix.setIdentity();
 	this->aspectRatio = 1; //?
@@ -99,23 +104,36 @@ void Camera::rotate (float32 angle, float32 ax, float32 ay, float32 az) {
 	
     Quaternion *rotation = new Quaternion();
     rotation->setFromAxis(angle,ax,ay,az);
-	
-    (*this->m_orientation) = (*rotation)*(*this->m_orientation);
+
+    Vec3 *new_forwardOrientation = new Vec3(this->m_forwardOrientation->x,this->m_forwardOrientation->y,this->m_forwardOrientation->z);
+    *new_forwardOrientation = (*rotation)*(*new_forwardOrientation);
+
+    Vec3 *new_upOrientation = new Vec3(this->m_upOrientation->x,this->m_upOrientation->y,this->m_upOrientation->z);
+    *new_upOrientation = (*rotation)*(*new_upOrientation);
+
+    this->m_forwardOrientation->set(0,new_forwardOrientation->x,new_forwardOrientation->y,new_forwardOrientation->z);
+    this->m_upOrientation->set(0,new_upOrientation->x,new_upOrientation->y,new_upOrientation->z);
 }
 
 void Camera::rotateX (float32 angle)  {
 	
-	this->rotate(angle,1,0,0);
+    Vec3 *axisZ = new Vec3(this->m_forwardOrientation->x,this->m_forwardOrientation->y,this->m_forwardOrientation->z);
+
+    Vec3 *axisY = new Vec3(this->m_upOrientation->x,this->m_upOrientation->y,this->m_upOrientation->z);
+
+    Vec3 axisX = axisY->crossProduct(*axisZ);
+
+    this->rotate(angle,axisX.x,axisX.y,axisX.z);
 }
 
 void Camera::rotateY (float32 angle)  {
 	
-	this->rotate(angle,0,1,0);
+    this->rotate(angle,this->m_upOrientation->x,this->m_upOrientation->y,this->m_upOrientation->z);
 }
 
 void Camera::rotateZ (float32 angle)  {
 	
-	this->rotate(angle,0,0,1);
+    this->rotate(angle,this->m_forwardOrientation->x,this->m_forwardOrientation->y,this->m_forwardOrientation->z);
 }
 
 
@@ -131,7 +149,7 @@ void Camera::setPosition(const Vec3 & v1) {
 
 void Camera::setOrientation(const Quaternion & q1) {
 	
-	this->m_orientation = new Quaternion(q1.w,q1.x,q1.y,q1.z);
+    this->m_forwardOrientation = new Quaternion(q1.w,q1.x,q1.y,q1.z);
 }
 
 void Camera::setAspectRatio (float32 ar) {
@@ -157,9 +175,9 @@ const GLMatrix& Camera::getProjectionMatrix() {
 
 void Camera::buildViewMatrix() {
 	
-    Vec3 *axis3 = new Vec3(this->m_orientation->x,this->m_orientation->y,this->m_orientation->z);
+    Vec3 *axis3 = new Vec3(this->m_forwardOrientation->x,this->m_forwardOrientation->y,this->m_forwardOrientation->z);
 
-    Vec3 *axis2 = new Vec3(axis3->y,-axis3->x,0);
+    Vec3 *axis2 = new Vec3(this->m_upOrientation->x,this->m_upOrientation->y,this->m_upOrientation->z);
 	
     Vec3 axis1 = axis2->crossProduct(*axis3);
 

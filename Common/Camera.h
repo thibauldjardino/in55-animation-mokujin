@@ -37,7 +37,8 @@ class Camera
 		void buildProjectionMatrix();
 	
         Vec3 *m_position;
-        Quaternion *m_orientation;
+        Quaternion *m_forwardOrientation;
+        Quaternion *m_upOrientation;
 		GLMatrix m_ViewMatrix;
 		GLMatrix m_ProjectionMatrix;
 		

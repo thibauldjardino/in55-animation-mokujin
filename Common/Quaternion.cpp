@@ -78,7 +78,7 @@ Vec3 Quaternion::operator* (const Vec3 & v) {
     Quaternion *rotation = new Quaternion(*this);
     rotation->normalize();
 	Quaternion rotation_conjuguate = rotation->conjuguate();
-    Quaternion rotated = (*rotation) * (*point) * rotation_conjuguate;
+    Quaternion rotated = (*rotation) * ((*point) * rotation_conjuguate);
 	
     return *(new Vec3(rotated.x, rotated.y, rotated.z));
 }
