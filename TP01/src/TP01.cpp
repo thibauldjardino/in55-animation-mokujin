@@ -128,28 +128,28 @@ TP01::keyPressEvent( QKeyEvent* event )
         close();
         break;
 
-    case Qt::Key_Left:
+    case Qt::Key_Q:
         camera->translateX(g_TranslationSpeed);
         break;
 
-    case Qt::Key_Right:
+    case Qt::Key_D:
         camera->translateX(-g_TranslationSpeed);
 
         break;
 
-    case Qt::Key_Up:
+    case Qt::Key_Z:
         camera->translateY(g_TranslationSpeed);
         break;
 
-    case Qt::Key_Down:
+    case Qt::Key_S:
         camera->translateY(-g_TranslationSpeed);
         break;
 
-    case Qt::Key_Z:
+    case Qt::Key_A:
         camera->translateZ(g_TranslationSpeed);
         break;
 
-    case Qt::Key_S:
+    case Qt::Key_E:
         camera->translateZ(-g_TranslationSpeed);
         break;
 
