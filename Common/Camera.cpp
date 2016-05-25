@@ -43,38 +43,24 @@ void Camera::translate (float32 x, float32 y, float32 z) {
 
 void Camera::translateX (float32 shift)  {
 	
-    Vec3 *axis = new Vec3(1,0,0);
+    Vec3 *axis3 = new Vec3(this->m_forwardOrientation->x,this->m_forwardOrientation->y,this->m_forwardOrientation->z);
 
-    Quaternion *rotation = new Quaternion();
+    Vec3 *axis2 = new Vec3(this->m_upOrientation->x,this->m_upOrientation->y,this->m_upOrientation->z);
 
-    this->buildViewMatrix();
+    Vec3 axis1 = axis2->crossProduct(*axis3);
+    axis1.normalize();
 
-    rotation->setRotationMatrix(this->getViewMatrix().data);
-
-    Vec3 axisRotated = ((*rotation)*(*axis));
-
-    std::cout << axisRotated.x << " " << axisRotated.y << " " << axisRotated.z << std::endl;
-
-    Vec3 translation = axisRotated*shift;
+    Vec3 translation = axis1*shift;
 
     (*this->m_position) += translation;
 }
 
 void Camera::translateY (float32 shift)  {
 	
-    Vec3 *axis = new Vec3(0,1,0);
+    Vec3 *axis2 = new Vec3(this->m_upOrientation->x,this->m_upOrientation->y,this->m_upOrientation->z);
+    axis2->normalize();
 
-    Quaternion *rotation = new Quaternion();
-
-    this->buildViewMatrix();
-
-    rotation->setRotationMatrix(this->getViewMatrix().data);
-
-    Vec3 axisRotated = ((*rotation)*(*axis));
-
-    std::cout << axisRotated.x << " " << axisRotated.y << " " << axisRotated.z << std::endl;
-
-    Vec3 translation = axisRotated*shift;
+    Vec3 translation = (*axis2)*shift;
 
     (*this->m_position) += translation;
 	
@@ -82,22 +68,12 @@ void Camera::translateY (float32 shift)  {
 
 void Camera::translateZ (float32 shift)  {
 	
-    Vec3 *axis = new Vec3(0,0,1);
+    Vec3 *axis3 = new Vec3(this->m_forwardOrientation->x,this->m_forwardOrientation->y,this->m_forwardOrientation->z);
+    axis3->normalize();
 
-    Quaternion *rotation = new Quaternion();
-
-    this->buildViewMatrix();
-
-    rotation->setRotationMatrix(this->getViewMatrix().data);
-
-    Vec3 axisRotated = ((*rotation)*(*axis));
-
-    std::cout << axisRotated.x << " " << axisRotated.y << " " << axisRotated.z << std::endl;
-
-    Vec3 translation = axisRotated*shift;
+    Vec3 translation = (*axis3)*shift;
 
     (*this->m_position) += translation;
-	
 }
 
 void Camera::rotate (float32 angle, float32 ax, float32 ay, float32 az) {

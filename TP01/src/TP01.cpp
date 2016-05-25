@@ -19,8 +19,8 @@ GLfloat translate1 = 0.0f;
 GLfloat translate2 = 0.0f;
 GLfloat translate3 = 0.0f;
 
-const GLfloat g_AngleSpeed = 0.1f;
-const GLfloat g_TranslationSpeed = 0.1f;
+const GLfloat g_AngleSpeed = 0.05f;
+const GLfloat g_TranslationSpeed = 0.5f;
 
 Basis* basis;
 Pyramid* pyr;
@@ -82,7 +82,7 @@ TP01::initializeObjects()
 void
 TP01::render()
 {
-   std::cout << camera->m_forwardOrientation->w << " " << camera->m_forwardOrientation->x << " " << camera->m_forwardOrientation->y << " " << camera->m_forwardOrientation->z << " " << std::endl;
+
 
     // Initialisation de la caméra
     lookAt(camera->m_position->x, camera->m_position->y, camera->m_position->z, camera->m_forwardOrientation->x+camera->m_position->x, camera->m_forwardOrientation->y+camera->m_position->y, camera->m_forwardOrientation->z+camera->m_position->z, camera->m_upOrientation->x, camera->m_upOrientation->y, camera->m_upOrientation->z );
@@ -129,11 +129,11 @@ TP01::keyPressEvent( QKeyEvent* event )
         break;
 
     case Qt::Key_Left:
-        camera->translateX(-g_TranslationSpeed);
+        camera->translateX(g_TranslationSpeed);
         break;
 
     case Qt::Key_Right:
-        camera->translateX(g_TranslationSpeed);
+        camera->translateX(-g_TranslationSpeed);
 
         break;
 
@@ -146,11 +146,11 @@ TP01::keyPressEvent( QKeyEvent* event )
         break;
 
     case Qt::Key_Z:
-        camera->translateZ(-g_TranslationSpeed);
+        camera->translateZ(g_TranslationSpeed);
         break;
 
     case Qt::Key_S:
-        camera->translateZ(g_TranslationSpeed);
+        camera->translateZ(-g_TranslationSpeed);
         break;
 
     case Qt::Key_R:
@@ -158,19 +158,19 @@ TP01::keyPressEvent( QKeyEvent* event )
         break;
 
     case Qt::Key_O:
-        camera->rotateX(g_AngleSpeed);
-        break;
-
-    case Qt::Key_K:
-       camera->rotateX(-g_AngleSpeed);
+        camera->rotateX(-g_AngleSpeed);
         break;
 
     case Qt::Key_L:
-        camera->rotateY(-g_AngleSpeed);
+       camera->rotateX(g_AngleSpeed);
+        break;
+
+    case Qt::Key_K:
+        camera->rotateY(g_AngleSpeed);
         break;
 
     case Qt::Key_M:
-        camera->rotateY(g_AngleSpeed);
+        camera->rotateY(-g_AngleSpeed);
         break;
 
     case Qt::Key_I:
