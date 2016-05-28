@@ -94,7 +94,10 @@ TP01::initializeObjects()
         QSharedPointer<Node> m_rootNode = model.getNodeData();
 
 
-
+        std::cout << m_rootNode.data()->name.toStdString() << std::endl;
+        //std::cout << m_rootNode.data()->transformation. << std::endl;
+        qDebug()<<m_rootNode.data()->transformation;
+        //qDebug()<<m_rootNode.data()->nodes;
 
     return true;
 }

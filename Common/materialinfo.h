@@ -7,7 +7,7 @@
 #include <QVector3D>
 #include <QVector4D>
 #include <QMatrix4x4>
-
+#include <QVectorIterator>
 
 
 struct MaterialInfo
