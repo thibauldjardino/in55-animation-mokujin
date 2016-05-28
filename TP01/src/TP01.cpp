@@ -1,5 +1,6 @@
 ﻿#include "TP01.h"
 
+#include <modelloader.h>
 
 #include "Shapes/Basis.h"
 #include "Shapes/Cubes.h"
@@ -28,6 +29,7 @@ Cylinder* cyl;
 Star* star;
 MultipleColorCube* cube;
 Camera *camera;
+
 
 TP01::TP01()
 {
@@ -74,6 +76,25 @@ TP01::initializeObjects()
     {
         cout << "NOT Loaded!" << endl;
     }
+
+
+    ModelLoader model;
+
+        if (!model.Load("C:/Users/Tiboty/Documents/GitHub/in55-animation-mokujin/TP01/release/Mokujin/zeb.3ds"))
+        {
+            cout << "NOT Good!" << endl;
+        }
+
+        QVector<float> *vertices;
+        QVector<float> *normals;
+        QVector<unsigned int> *indices;
+
+        model.getBufferData(&vertices, &normals, &indices);
+
+        QSharedPointer<Node> m_rootNode = model.getNodeData();
+
+
+
 
     return true;
 }

@@ -8,11 +8,15 @@ TARGET = TP01
 TEMPLATE = app
 
 DEPENDPATH += src
-INCLUDEPATH = ../Common/ src "../glew-mingw\include"
-win32:LIBS += -L"../glew-mingw\lib" -lglew32
+INCLUDEPATH = ../Common/ src "../glew-mingw\include" \
+              ../Common/ src "../Assimp3-1-1_MinGW4-8-1_Win32\include"
+
+win32:LIBS += -L"../glew-mingw\lib" -lglew32 \
+              -L"..\Assimp3-1-1_MinGW4-8-1_Win32" -lassimp
 
 DESTDIR = release
 OBJECTS_DIR = obj
+
 
 # Input
 HEADERS += \
@@ -29,7 +33,9 @@ HEADERS += \
     ../Common/Shapes/Star.h \
     ../Common/Quaternion.h \
     ../Common/Camera.h \
-    src/TP01.h
+    src/TP01.h \
+    ../Common/materialinfo.h \
+    ../Common/modelloader.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -46,4 +52,5 @@ SOURCES += \
     src/TP01.cpp \
     src/main.cpp \
     ../Common/Quaternion.cpp \
-    ../Common/Camera.cpp
+    ../Common/Camera.cpp \
+    ../Common/modelloader.cpp

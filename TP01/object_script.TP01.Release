@@ -12,4 +12,6 @@ INPUT(
 ./obj\Star.o
 ./obj\TP01.o
 ./obj\main.o
+./obj\Quaternion.o
+./obj\Camera.o
 );
