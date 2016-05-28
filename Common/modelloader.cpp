@@ -11,11 +11,12 @@ bool ModelLoader::Load(QString pathToFile)
     Assimp::Importer importer;
 
     const aiScene* scene = importer.ReadFile(pathToFile.toStdString(),
-            aiProcess_GenSmoothNormals |
+            //aiProcess_GenSmoothNormals |
             aiProcess_CalcTangentSpace |
             aiProcess_Triangulate |
             aiProcess_JoinIdenticalVertices |
-            aiProcess_SortByPType
+            aiProcess_SortByPType |
+            aiProcess_ConvertToLeftHanded
             );
 
     if (!scene)
@@ -37,6 +38,21 @@ bool ModelLoader::Load(QString pathToFile)
         qDebug() << "Error: No meshes found";
         return false;
     }
+
+    if(scene->HasMeshes()){
+        for (unsigned int ii = 0; ii < scene->mNumMeshes; ++ii)
+        {
+            m_meshes.append(processMesh(scene->mMeshes[ii]));
+        }
+        for (unsigned int ii = 0; ii < scene->mNumMeshes; ++ii)
+        {
+
+            qDebug()<<m_meshes[ii].data()->name;
+        }
+
+    }
+
+
     if (scene->mRootNode != NULL)
     {
         Node *rootNode = new Node;
@@ -163,10 +179,12 @@ QSharedPointer<MaterialInfo> ModelLoader::processMaterial(aiMaterial *material)
 void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNode, Node &newNode)
 {
     newNode.name = node->mName.length != 0 ? node->mName.C_Str() : "";
-
     newNode.transformation = QMatrix4x4(node->mTransformation[0]);
-
+    std::cout<< newNode.name.toStdString()<<std::endl;
+    qDebug()<<newNode.transformation;
     newNode.meshes.resize(node->mNumMeshes);
+
+    //M_MESH EMPTY
     for (uint imesh = 0; imesh < node->mNumMeshes; ++imesh)
     {
         QSharedPointer<Mesh> mesh = m_meshes[node->mMeshes[imesh]];
@@ -177,5 +195,6 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
     {
         newNode.nodes.push_back(Node());
         processNode(scene, node->mChildren[ich], parentNode, newNode.nodes[ich]);
+
     }
 }

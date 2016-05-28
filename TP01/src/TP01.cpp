@@ -80,7 +80,7 @@ TP01::initializeObjects()
 
     ModelLoader model;
 
-        if (!model.Load("C:/Users/Tiboty/Documents/GitHub/in55-animation-mokujin/TP01/release/Mokujin/zeb.3ds"))
+        if (!model.Load("C:/Users/Tiboty/Documents/GitHub/in55-animation-mokujin/TP01/release/Mokujin/mokujin_squelette_bound.dae"))
         {
             cout << "NOT Good!" << endl;
         }
@@ -91,13 +91,15 @@ TP01::initializeObjects()
 
         model.getBufferData(&vertices, &normals, &indices);
 
-        QSharedPointer<Node> m_rootNode = model.getNodeData();
+        //QSharedPointer<Node> m_rootNode = model.getNodeData();
 
 
-        std::cout << m_rootNode.data()->name.toStdString() << std::endl;
+        //std::cout << m_rootNode.data()->name.toStdString() << std::endl;
         //std::cout << m_rootNode.data()->transformation. << std::endl;
-        qDebug()<<m_rootNode.data()->transformation;
+        //()<<m_rootNode.data()->transformation;
         //qDebug()<<m_rootNode.data()->nodes;
+
+
 
     return true;
 }

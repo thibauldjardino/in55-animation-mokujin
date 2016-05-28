@@ -137,7 +137,7 @@ $(DESTDIR_TARGET):  $(OBJECTS)
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.TP01.Release  $(LIBS)
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-g++ -o Makefile.Release ..\TP01\TP01.pro
+	@$(QMAKE) -spec win32-g++ CONFIG+=debug -o Makefile.Release ..\TP01\TP01.pro
 
 qmake_all: FORCE
 
@@ -501,24 +501,11 @@ obj/Star.o: ../Common/Shapes/Star.cpp ../Common/Shapes/Star.h \
 		../Common/AbstractFramework.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj\Star.o ..\Common\Shapes\Star.cpp
 
-obj/TP01.o: ../TP01/src/TP01.cpp ../Common/Shapes/Basis.h \
-		../Common/Object3D.h \
-		../Common/AbstractFramework.h \
-		../glew-mingw/include/GL/glew.h \
-		../Common/Shapes/Cubes.h \
-		../Common/Shapes/ParametricShape.h \
-		../Common/Shapes/Shape.h \
-		../Common/Types.h \
-		../Common/Shapes/Pyramid.h \
-		../Common/Shapes/Cylinder.h \
-		../Common/Shapes/Star.h \
-		../Common/Camera.h \
-		../Common/Vectors.h \
-		../Common/Quaternion.h \
-		../Common/GlFramework.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QLinkedList \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlinkedlist.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiterator.h \
+obj/TP01.o: ../TP01/src/TP01.cpp ../Common/modelloader.h \
+		../Common/materialinfo.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QString \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstring.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qchar.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qglobal.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qconfig.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qfeatures.h \
@@ -547,50 +534,117 @@ obj/TP01.o: ../TP01/src/TP01.cpp ../Common/Shapes/Basis.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qmutex.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qnumeric.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qrefcount.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/QImage \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qimage.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtransform.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qmatrix.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qpolygon.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qvector.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qalgorithms.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlist.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qarraydata.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qbytearraylist.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qbytearray.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qrefcount.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qnamespace.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstring.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qchar.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qarraydata.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qpoint.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qrect.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qmargins.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qsize.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qregion.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QSharedPointer \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qhash.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiterator.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlist.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qalgorithms.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qobject.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qobjectdefs.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qobjectdefs_impl.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qdatastream.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qscopedpointer.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiodevice.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qobject.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qcoreevent.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qscopedpointer.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qmetatype.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qisenum.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qobject_impl.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QVector \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qvector.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qpoint.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/QVector3D \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qvector3d.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/QVector4D \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qvector4d.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/QMatrix4x4 \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qmatrix4x4.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qquaternion.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qgenericmatrix.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qmap.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qtextstream.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qiodevice.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlocale.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qvariant.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstringlist.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qregexp.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qset.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QVectorIterator \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/Importer.hpp \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/types.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/defs.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/vector3.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/Compiler/pushpack1.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/Compiler/poppack1.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/vector2.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/color4.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/matrix3x3.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/matrix4x4.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/quaternion.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/vector2.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/vector3.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/color4.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/quaternion.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/matrix3x3.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/matrix4x4.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/config.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/scene.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/texture.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/mesh.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/light.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/camera.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/material.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/material.inl \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/anim.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/metadata.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/Compiler/pstdint.h \
+		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/postprocess.h \
+		../Common/Shapes/Basis.h \
+		../Common/Object3D.h \
+		../Common/AbstractFramework.h \
+		../glew-mingw/include/GL/glew.h \
+		../Common/Shapes/Cubes.h \
+		../Common/Shapes/ParametricShape.h \
+		../Common/Shapes/Shape.h \
+		../Common/Types.h \
+		../Common/Shapes/Pyramid.h \
+		../Common/Shapes/Cylinder.h \
+		../Common/Shapes/Star.h \
+		../Common/Camera.h \
+		../Common/Vectors.h \
+		../Common/Quaternion.h \
+		../Common/GlFramework.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QLinkedList \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qlinkedlist.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/QImage \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qline.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qpainterpath.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qrgb.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qpixelformat.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstringlist.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qregexp.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qstringmatcher.h
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qpixelformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj\TP01.o ..\TP01\src\TP01.cpp
 
 obj/main.o: ../TP01/src/main.cpp ../TP01/src/TP01.h \
@@ -977,6 +1031,7 @@ obj/modelloader.o: ../Common/modelloader.cpp ../Common/modelloader.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qrect.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qmargins.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QVectorIterator \
 		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/Importer.hpp \
 		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/types.h \
 		../Assimp3-1-1_MinGW4-8-1_Win32/include/assimp/defs.h \
