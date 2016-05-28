@@ -84,7 +84,7 @@ TP01::initializeObjects()
 
     /*ModelLoader model;
 
-        if (!model.Load("C:/Users/Tiboty/Documents/GitHub/in55-animation-mokujin/TP01/release/Mokujin/mokujin_squelette_bound.dae"))
+        if (!model.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
         {
             cout << "NOT Good!" << endl;
         }
