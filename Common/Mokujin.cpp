@@ -2,7 +2,7 @@
 #include <iostream>
 Mokujin::Mokujin():Shape{}
 {
-    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
+    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.obj"))
     {
         std::cout << "NOT Good!" << std::endl;
     }
