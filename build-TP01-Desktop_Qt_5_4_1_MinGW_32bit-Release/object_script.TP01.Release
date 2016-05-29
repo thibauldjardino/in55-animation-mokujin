@@ -14,5 +14,6 @@ INPUT(
 ./obj\main.o
 ./obj\Quaternion.o
 ./obj\Camera.o
-./obj\modelloader.o
+./obj\Mokujin.o
+./obj\ModelLoader.o
 );

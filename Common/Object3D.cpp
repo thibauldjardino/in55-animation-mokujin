@@ -1,5 +1,5 @@
 ﻿#include "Object3D.h"
-
+#include <iostream>
 
 AbstractFramework* Object3D::m_Framework = NULL;
 
@@ -14,6 +14,8 @@ Object3D::setFramework( AbstractFramework* fw )
 void
 Object3D::draw()
 {
+
+
     if (m_Framework->useShader( "color" ))
     {
         m_Framework->computeAncillaryMatrices();

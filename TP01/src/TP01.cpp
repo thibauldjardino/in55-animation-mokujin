@@ -1,6 +1,6 @@
 ﻿#include "TP01.h"
 
-#include <modelloader.h>
+#include "ModelLoader.h"
 
 #include "Shapes/Basis.h"
 #include "Shapes/Cubes.h"
@@ -11,7 +11,7 @@
 #include "Quaternion.h"
 #include <iostream>
 
-#include<mokujin.h>
+#include "Mokujin.h"
 
 using namespace std;
 
@@ -122,19 +122,18 @@ TP01::render()
     pushMatrix();
     rotate( angle1, 0, 1, 0 );
     rotate( angle2, 1, 0, 0 );
-    // translate(translate1,translate2,translate3);
+
 
     basis->draw();
 
 
-    pushMatrix();
-        translate( -10.0, 0, 0 );
-        //mokujin->draw();
-    popMatrix();
+        //star->draw();
+        mokujin->draw();
+
     popMatrix();
     /*pushMatrix();
     translate( -10.0, 0, 0 );
-    star->draw();
+
     popMatrix();
 
     pushMatrix();

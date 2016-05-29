@@ -34,9 +34,9 @@ HEADERS += \
     ../Common/Quaternion.h \
     ../Common/Camera.h \
     src/TP01.h \
-    ../Common/materialinfo.h \
-    ../Common/modelloader.h \
-    ../Common/mokujin.h
+    ../Common/Mokujin.h \
+    ../Common/ModelLoader.h \
+    ../Common/Materialnfo.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -54,5 +54,5 @@ SOURCES += \
     src/main.cpp \
     ../Common/Quaternion.cpp \
     ../Common/Camera.cpp \
-    ../Common/modelloader.cpp \
-    ../Common/mokujin.cpp
+    ../Common/Mokujin.cpp \
+    ../Common/ModelLoader.cpp
