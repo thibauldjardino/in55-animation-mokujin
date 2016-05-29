@@ -49,7 +49,7 @@ bool ModelLoader::Load(QString pathToFile)
 
             qDebug()<<m_meshes[ii].data()->name;
         }
-
+         qDebug()<<m_vertices.length();
     }
 
 
@@ -179,9 +179,19 @@ QSharedPointer<MaterialInfo> ModelLoader::processMaterial(aiMaterial *material)
 void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNode, Node &newNode)
 {
     newNode.name = node->mName.length != 0 ? node->mName.C_Str() : "";
-    newNode.transformation = QMatrix4x4(node->mTransformation[0]);
     std::cout<< newNode.name.toStdString()<<std::endl;
+    QMatrix4x4 tmp = QMatrix4x4(node->mTransformation[0]);
+    //doesn't work
+    tmp.column(0).setZ(0);
+    tmp.column(1).setZ(-tmp.column(1).z());
+    tmp.column(3).setZ(-tmp.column(3).z());
+    tmp.column(3).setZ(-tmp.column(3).z());
+    tmp.row(0).setZ(-tmp.row(0).z());
+    tmp.row(1).setZ(-tmp.row(1).z());
+
+    newNode.transformation = tmp;
     qDebug()<<newNode.transformation;
+    std::cout<< newNode.transformation.column(0).z()<<std::endl;
     newNode.meshes.resize(node->mNumMeshes);
 
     //M_MESH EMPTY

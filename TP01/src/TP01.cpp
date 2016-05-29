@@ -11,6 +11,8 @@
 #include "Quaternion.h"
 #include <iostream>
 
+#include<mokujin.h>
+
 using namespace std;
 
 
@@ -29,7 +31,7 @@ Cylinder* cyl;
 Star* star;
 MultipleColorCube* cube;
 Camera *camera;
-
+Mokujin *mokujin;
 
 TP01::TP01()
 {
@@ -42,6 +44,7 @@ TP01::TP01()
     cube = new MultipleColorCube();
     camera = new Camera(15,15,15);
 
+    mokujin = new Mokujin();
     std::cout << camera->m_forwardOrientation->w << " " << camera->m_forwardOrientation->x << " " << camera->m_forwardOrientation->y << " " << camera->m_forwardOrientation->z << " " << std::endl;
 }
 
@@ -54,6 +57,7 @@ TP01::~TP01()
     delete cyl;
     delete cube;
     delete camera;
+    delete mokujin;
 }
 
 
@@ -78,7 +82,7 @@ TP01::initializeObjects()
     }
 
 
-    ModelLoader model;
+    /*ModelLoader model;
 
         if (!model.Load("C:/Users/Tiboty/Documents/GitHub/in55-animation-mokujin/TP01/release/Mokujin/mokujin_squelette_bound.dae"))
         {
@@ -91,7 +95,7 @@ TP01::initializeObjects()
 
         model.getBufferData(&vertices, &normals, &indices);
 
-        //QSharedPointer<Node> m_rootNode = model.getNodeData();
+        QSharedPointer<Node> m_rootNode = model.getNodeData();
 
 
         //std::cout << m_rootNode.data()->name.toStdString() << std::endl;
@@ -100,7 +104,7 @@ TP01::initializeObjects()
         //qDebug()<<m_rootNode.data()->nodes;
 
 
-
+    */
     return true;
 }
 
@@ -122,7 +126,13 @@ TP01::render()
 
     basis->draw();
 
+
     pushMatrix();
+        translate( -10.0, 0, 0 );
+        //mokujin->draw();
+    popMatrix();
+    popMatrix();
+    /*pushMatrix();
     translate( -10.0, 0, 0 );
     star->draw();
     popMatrix();
@@ -141,7 +151,7 @@ TP01::render()
     translate( 5.0, 0, 0 );
     cube->draw();
     popMatrix();
-    popMatrix();
+    popMatrix();*/
 }
 
 
