@@ -2,7 +2,7 @@
 #include <iostream>
 Mokujin::Mokujin():Shape{}
 {
-    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.obj"))
+    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
     {
         std::cout << "NOT Good!" << std::endl;
     }
@@ -18,8 +18,24 @@ Mokujin::Mokujin():Shape{}
 
     std::cout << "Size indices array : " << this->indices->size() << std::endl;
 
-    //this->m_rootNode = this->m_loader.getNodeData();
-    //qDebug()<<this->vertices->size()/3;
+    const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
+    int nbMeshes = this->m_loader.m_meshes.size();
+
+    for (int i=0; i<nbMeshes; i++) {
+
+        std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
+    }
+
+    Node& rootNode = *(this->m_loader.m_rootNode.data());
+
+    QVector<Node> *tabNodes = new QVector<Node>();
+
+    buildNodeList(rootNode,tabNodes);
+
+    for (int i=0; i<tabNodes->size(); i++) {
+
+        std::cout << "Node numero " << i << " : " << tabNodes->at(i).name.toStdString() << std::endl;
+    }
 }
 
 
@@ -53,7 +69,7 @@ void Mokujin::drawShape( const char* shader_name )
 {
 
     // A RETRAVAILLER POUR AFFICHER TOUS LES MESHES
-   /* const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
+   /*
 
 
     QMatrix4x4 *model = new QMatrix4x4();
@@ -71,7 +87,7 @@ void Mokujin::drawShape( const char* shader_name )
     glEnableVertexAttribArray( 0 );
 
     glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, tabVertices );
-    glDrawElements( GL_TRIANGLES, this->indices->size(), GL_UNSIGNED_INT, tabIndices );
+    glDrawElements( GL_LINES, this->indices->size(), GL_UNSIGNED_INT, tabIndices );
 
     glDisableVertexAttribArray( 0 );
 
@@ -80,4 +96,25 @@ void Mokujin::drawShape( const char* shader_name )
     glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, tab );
     glDrawElements( GL_TRIANGLES, 150, GL_UNSIGNED_INT, this->indices->data() );
     glDisableVertexAttribArray( var1 );*/
+}
+
+void Mokujin::drawMesh( const Mesh *mesh) {
+
+    //TODO
+}
+
+
+void Mokujin::buildNodeList (const Node & root, QVector<Node> *list) {
+
+    list->append(root);
+    if(!root.nodes.empty()) {
+        for(int i=0; i<root.nodes.size(); i++) {
+            this->buildNodeList (root.nodes.at(i), list);
+        }
+    }
+
+   /* for(int i=0; i<root.nodes.size(); i++) {
+        std::cout << "Nom : " <<root.nodes.at(i).name.toStdString() << std::endl;
+        buildNodeList(root.nodes.at(i));
+    }*/
 }

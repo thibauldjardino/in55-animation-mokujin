@@ -12,6 +12,9 @@ public:
 protected:
     void drawShape( const char* shader_name );
     void drawNode(const QMatrix4x4& model, const Node *node, QMatrix4x4 parent);
+    void drawMesh(const Mesh *mesh);
+
+    void buildNodeList (const Node &root, QVector<Node> *list);
 
 protected:
     ModelLoader              m_loader;

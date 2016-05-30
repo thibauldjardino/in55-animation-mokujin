@@ -58,7 +58,7 @@ bool ModelLoader::Load(QString pathToFile)
     }
 
 
-    /*if (scene->mRootNode != NULL)
+    if (scene->mRootNode != NULL)
     {
         Node *rootNode = new Node;
         processNode(scene, scene->mRootNode, 0, *rootNode);
@@ -68,7 +68,7 @@ bool ModelLoader::Load(QString pathToFile)
     {
         qDebug() << "Error loading model";
         return false;
-    }*/
+    }
 
     return true;
 }
@@ -186,13 +186,6 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
     newNode.name = node->mName.length != 0 ? node->mName.C_Str() : "";
     std::cout<< newNode.name.toStdString()<<std::endl;
     QMatrix4x4 tmp = QMatrix4x4(node->mTransformation[0]);
-    //doesn't work
-    tmp.column(0).setZ(0);
-    tmp.column(1).setZ(-tmp.column(1).z());
-    tmp.column(3).setZ(-tmp.column(3).z());
-    tmp.column(3).setZ(-tmp.column(3).z());
-    tmp.row(0).setZ(-tmp.row(0).z());
-    tmp.row(1).setZ(-tmp.row(1).z());
 
     newNode.transformation = tmp;
     qDebug()<<newNode.transformation;
