@@ -2,7 +2,7 @@
 #include <iostream>
 Mokujin::Mokujin():Shape{}
 {
-    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
+    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.obj"))
     {
         std::cout << "NOT Good!" << std::endl;
     }
@@ -21,21 +21,21 @@ Mokujin::Mokujin():Shape{}
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 
-    for (int i=0; i<nbMeshes; i++) {
+   /* for (int i=0; i<nbMeshes; i++) {
 
         std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
     }
-
+*/
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 
     QVector<Node> *tabNodes = new QVector<Node>();
 
     buildNodeList(rootNode,tabNodes);
 
-    for (int i=0; i<tabNodes->size(); i++) {
+   /* for (int i=0; i<tabNodes->size(); i++) {
 
         std::cout << "Node numero " << i << " : " << tabNodes->at(i).name.toStdString() << std::endl;
-    }
+    }*/
 }
 
 
