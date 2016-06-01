@@ -2,7 +2,7 @@
 #include <iostream>
 Mokujin::Mokujin():Shape{}
 {
-    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.obj"))
+    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
     {
         std::cout << "NOT Good!" << std::endl;
     }
@@ -17,7 +17,6 @@ Mokujin::Mokujin():Shape{}
     std::cout << "Size normals array : " << this->normals->size() << std::endl;
 
     std::cout << "Size indices array : " << this->indices->size() << std::endl;
-
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 

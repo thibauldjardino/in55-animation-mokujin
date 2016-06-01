@@ -17,6 +17,8 @@ public:
 
     QSharedPointer<Node> getNodeData() { return m_rootNode; }
 
+    void Bones(const aiMesh *mesh);
+
     QSharedPointer<MaterialInfo> processMaterial(aiMaterial *mater);
         QSharedPointer<Mesh> processMesh(aiMesh *mesh);
         void processNode(const aiScene *scene, aiNode *node, Node *parentNode, Node &newNode);

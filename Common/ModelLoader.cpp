@@ -11,11 +11,11 @@ bool ModelLoader::Load(QString pathToFile)
     Assimp::Importer importer;
 
     const aiScene* scene = importer.ReadFile(pathToFile.toStdString(),
-                                             aiProcess_CalcTangentSpace |
+                                             //aiProcess_CalcTangentSpace |
+                                             aiProcess_LimitBoneWeights |
                                              aiProcess_Triangulate |
                                              aiProcess_JoinIdenticalVertices |
-                                             aiProcess_SortByPType |
-                                             aiProcess_ConvertToLeftHanded
+                                             aiProcess_SortByPType
                                              );
 
     if (!scene)
@@ -68,6 +68,10 @@ bool ModelLoader::Load(QString pathToFile)
     {
         qDebug() << "Error loading model";
         return false;
+    }
+    for (int i=0; i<scene->mNumMeshes; i++) {
+
+           Bones(scene->mMeshes[i]);
     }
 
     return true;
@@ -205,4 +209,12 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
         processNode(scene, node->mChildren[ich], parentNode, newNode.nodes[ich]);
 
     }
+}
+
+void ModelLoader::Bones(const aiMesh *mesh)
+{   qDebug()<< mesh->mBones;
+    /*for (int i = 0; i < mesh->mAnimMeshes; i++) {
+        const aiBone *bone = mesh->mBones[i];
+        qDebug()<<mesh->mName.C_Str();
+    }*/
 }
