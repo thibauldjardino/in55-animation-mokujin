@@ -21,12 +21,12 @@ Mokujin::Mokujin():Shape{}
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 
-    for (int i=1; i<nbMeshes; i++) {
+    /*for (int i=1; i<nbMeshes; i++) {
 
         std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
         qDebug()<<tabMeshes[i].data()->m_indices;
         QThread::sleep(1000);
-    }
+    }*/
 
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 

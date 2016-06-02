@@ -214,10 +214,3 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
     }
 }
 
-void ModelLoader::Bones(const aiMesh *mesh)
-{   qDebug()<< mesh->mBones;
-    /*for (int i = 0; i < mesh->mAnimMeshes; i++) {
-        const aiBone *bone = mesh->mBones[i];
-        qDebug()<<mesh->mName.C_Str();
-    }*/
-}
