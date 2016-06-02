@@ -1,9 +1,11 @@
 #include "Mokujin.h"
 #include <iostream>
 #include <qthread.h>
+using namespace std;
+
 Mokujin::Mokujin():Shape{}
 {
-    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.fbx"))
+    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
     {
         std::cout << "NOT Good!" << std::endl;
     }
@@ -21,12 +23,15 @@ Mokujin::Mokujin():Shape{}
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 
-    /*for (int i=1; i<nbMeshes; i++) {
+    for (int i=0; i<nbMeshes; i++) {
 
         std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
-        qDebug()<<tabMeshes[i].data()->m_indices;
-        QThread::sleep(1000);
-    }*/
+        //this->drawMesh(tabMeshes[i]);
+        //qDebug()<<tabMeshes[i].data()->m_indices;
+        //QThread::sleep(1000);
+    }
+    cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
+
 
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 
@@ -51,15 +56,8 @@ void Mokujin::drawNode(const QMatrix4x4& model, const Node *node, QMatrix4x4 par
         i<this->m_loader.m_meshes.size()
         ; ++i)
     {
-        const Mesh& m = *node->meshes[i];
-        qDebug()<<m.indexCount;
-        qDebug()<<m.indexOffset;
-        qDebug()<<"passe";
-        glEnableVertexAttribArray( 0 );
-        glEnableVertexAttribArray( 1 );
-        glDrawElements(GL_TRIANGLES, m.indexCount, GL_UNSIGNED_INT, (const GLvoid*)(m.indexOffset * sizeof(GLuint)));
-        glDisableVertexAttribArray( 0 );
-        glDisableVertexAttribArray( 1 );
+        Mesh* m = node->meshes[i].data();
+        this->drawMesh(m);
     }
 
     // Recursively draw this nodes children nodes
@@ -70,39 +68,25 @@ void Mokujin::drawNode(const QMatrix4x4& model, const Node *node, QMatrix4x4 par
 void Mokujin::drawShape( const char* shader_name )
 {
 
-    // A RETRAVAILLER POUR AFFICHER TOUS LES MESHES
-   /*
+    const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
+    int nbMeshes = this->m_loader.m_meshes.size();
 
+//    this->drawNode(this->m_rootNode.data()->transformation,this->m_rootNode.data(),NULL);
 
-    QMatrix4x4 *model = new QMatrix4x4();
-    this->drawNode(*model,,*model);*/
+    for (int i=0; i<nbMeshes; i++) {
+        this->drawMesh(tabMeshes[i].data());
+    }
 
-    const GLfloat *tabVertices = this->vertices->constData();
-
-    const GLuint *tabIndices = this->indices->constData();
-
-    /*for (int i=0; i<this->indices->size(); i+=3) {
-
-        std::cout << tab2[i] << " " << tab2[i+1] << " " << tab2[i+2] << std::endl;
-    }*/
-
-    glEnableVertexAttribArray( 0 );
-
-    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, tabVertices );
-    glDrawElements( GL_LINES, this->indices->size(), GL_UNSIGNED_INT, tabIndices );
-
-    glDisableVertexAttribArray( 0 );
-
-    /*GLint var1 = glGetAttribLocation( m_Framework->getCurrentShaderId(), "position" );
-    glEnableVertexAttribArray( var1 );
-    glVertexAttribPointer( var1, 3, GL_FLOAT, GL_FALSE, 0, tab );
-    glDrawElements( GL_TRIANGLES, 150, GL_UNSIGNED_INT, this->indices->data() );
-    glDisableVertexAttribArray( var1 );*/
 }
 
 void Mokujin::drawMesh( const Mesh *mesh) {
 
-    //TODO
+    glEnableVertexAttribArray( 0 );
+
+    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
+    glDrawElements( GL_LINES, mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
+
+    glDisableVertexAttribArray( 0 );
 }
 
 

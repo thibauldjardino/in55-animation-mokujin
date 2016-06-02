@@ -135,9 +135,9 @@ QSharedPointer<Mesh> ModelLoader::processMesh(aiMesh *mesh)
         m_indices.push_back(face->mIndices[1]+vertindexoffset);
         m_indices.push_back(face->mIndices[2]+vertindexoffset);
 
-        newMesh->m_indices.push_back(face->mIndices[0]+vertindexoffset);
-        newMesh->m_indices.push_back(face->mIndices[1]+vertindexoffset);
-        newMesh->m_indices.push_back(face->mIndices[2]+vertindexoffset);
+        newMesh->m_indices.push_back(face->mIndices[0]/*+vertindexoffset*/);
+        newMesh->m_indices.push_back(face->mIndices[1]/*+vertindexoffset*/);
+        newMesh->m_indices.push_back(face->mIndices[2]/*+vertindexoffset*/);
     }
 
     newMesh->indexCount = m_indices.size() - indexCountBefore;
