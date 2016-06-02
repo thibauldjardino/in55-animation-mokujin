@@ -3,15 +3,17 @@
 
 #include "Shapes/Shape.h"
 #include "ModelLoader.h"
+#include <iostream>
+#include <qthread.h>
+#include "GlWindow.h"
 
-
-class Mokujin : public Shape
+class Mokujin : public Object3D
 {
 public:
     Mokujin();
 protected:
     void drawShape( const char* shader_name );
-    void drawNode(const QMatrix4x4& model, const Node *node, QMatrix4x4 parent);
+    void drawNode(const Node *node);
     void drawMesh(const Mesh *mesh);
 
     void buildNodeList (const Node &root, QVector<Node> *list);

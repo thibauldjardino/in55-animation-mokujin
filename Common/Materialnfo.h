@@ -39,6 +39,7 @@ struct Node
 {
     QString name;
     QMatrix4x4 transformation;
+    unsigned int nbMeshes;
     QVector<QSharedPointer<Mesh> > meshes;
     QVector<Node> nodes;
 };

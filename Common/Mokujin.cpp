@@ -1,9 +1,8 @@
 #include "Mokujin.h"
-#include <iostream>
-#include <qthread.h>
+
 using namespace std;
 
-Mokujin::Mokujin():Shape{}
+Mokujin::Mokujin():Object3D{}
 {
     if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
     {
@@ -46,36 +45,50 @@ Mokujin::Mokujin():Shape{}
 }
 
 
-void Mokujin::drawNode(const QMatrix4x4& model, const Node *node, QMatrix4x4 parent)
+void Mokujin::drawNode(const Node *root)
 {
-    // Prepare matrices
-    QMatrix4x4 local = parent * node->transformation;
 
-    // Draw each mesh in this node
-    for(int i = 0;
-        i<this->m_loader.m_meshes.size()
-        ; ++i)
-    {
-        Mesh* m = node->meshes[i].data();
-        this->drawMesh(m);
+    cout << "-------- DEBUGG NODE ---------" << endl;
+
+    this->m_Framework->pushMatrix();
+
+    cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
+
+   // this->m_Framework->applyMatrix(root->transformation);
+
+    this->m_Framework->translate(1,1,1);
+
+    cout << "-------- DEBUGG NODE apres TRANSLATE ---------" << endl;
+
+    cout << "MESH SIZE : " << root->nbMeshes << endl;
+
+    if(root->nbMeshes>0) {
+        cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
+        for (int i=0; i<root->meshes.size(); i++) {
+            this->drawMesh(root->meshes.at(i).data());
+        }
+    }
+    else {
+        cout << "-------- DEBUGG NODE ne lance pas MESH ---------" << endl;
     }
 
-    // Recursively draw this nodes children nodes
-    for(int i = 0; i < node->nodes.size(); ++i)
-        drawNode(model, &node->nodes[i], local);
+
+    if(!root->nodes.empty()) {
+        for(int i=0; i<root->nodes.size(); i++) {
+
+            cout << "-------- DEBUGG NODE lance NODE ---------" << endl;
+            this->drawNode(&root->nodes.at(i));
+        }
+    }
+
+    this->m_Framework->popMatrix();
 }
 
 void Mokujin::drawShape( const char* shader_name )
 {
+    cout << "-------- DEBUGG ---------" << endl;
 
-    const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
-    int nbMeshes = this->m_loader.m_meshes.size();
-
-//    this->drawNode(this->m_rootNode.data()->transformation,this->m_rootNode.data(),NULL);
-
-    for (int i=0; i<nbMeshes; i++) {
-        this->drawMesh(tabMeshes[i].data());
-    }
+    this->drawNode(this->m_rootNode.data());
 
 }
 

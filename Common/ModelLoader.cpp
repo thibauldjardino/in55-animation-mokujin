@@ -197,6 +197,7 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
     newNode.transformation = tmp;
     //qDebug()<<newNode.transformation;
     //std::cout<< newNode.transformation.column(0).z()<<std::endl;
+    newNode.nbMeshes = node->mNumMeshes;
     newNode.meshes.resize(node->mNumMeshes);
 
     //M_MESH EMPTY

@@ -16,6 +16,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QGLWidget>
+#include <QMatrix4x4>
 #include <limits>
 #include <cmath>
 #include "LF_String.h"
@@ -376,6 +377,20 @@ GlFramework::setOrtho(GLfloat fovY, GLfloat ratio, GLfloat zNear, GLfloat zFar)
     pProjMatrix.m[3][0] = 0.0f;             pProjMatrix.m[3][1] = 0.0f;             pProjMatrix.m[3][2] = 0.0f;             pProjMatrix.m[3][3] =  1.0f;
 }
 
+void
+GlFramework::applyMatrix( QMatrix4x4 transformation ) {
+
+    cout << "-------- DEBUGG APPLY ---------" << endl;
+
+    GLMatrix r;
+    for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
+            r.m[i][j] = transformation(i,j);
+        }
+    }
+
+    pModelMatrix = pModelMatrix * r;
+}
 
 void
 GlFramework::lookAt(GLfloat eyeX, GLfloat eyeY, GLfloat eyeZ, GLfloat targetX, GLfloat targetY, GLfloat targetZ, GLfloat upX, GLfloat upY, GLfloat upZ)
@@ -579,3 +594,5 @@ GlFramework::createTexture( const char* filename )
 
 	return texId;
 }
+
+

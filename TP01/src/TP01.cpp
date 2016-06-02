@@ -128,7 +128,7 @@ TP01::render()
 
 
         //star->draw();
-        mokujin->draw();
+    mokujin->draw();
 
     popMatrix();
     /*pushMatrix();
