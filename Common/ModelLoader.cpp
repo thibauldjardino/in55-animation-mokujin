@@ -69,11 +69,6 @@ bool ModelLoader::Load(QString pathToFile)
         qDebug() << "Error loading model";
         return false;
     }
-    for (int i=0; i<scene->mNumMeshes; i++) {
-
-           Bones(scene->mMeshes[i]);
-    }
-
     return true;
 }
 
@@ -107,6 +102,10 @@ QSharedPointer<Mesh> ModelLoader::processMesh(aiMesh *mesh)
             m_vertices.push_back(vec.x);
             m_vertices.push_back(vec.y);
             m_vertices.push_back(vec.z);
+
+            newMesh->m_vertices.push_back(vec.x);
+            newMesh->m_vertices.push_back(vec.y);
+            newMesh->m_vertices.push_back(vec.z);
         }
     }
 
@@ -135,6 +134,10 @@ QSharedPointer<Mesh> ModelLoader::processMesh(aiMesh *mesh)
         m_indices.push_back(face->mIndices[0]+vertindexoffset);
         m_indices.push_back(face->mIndices[1]+vertindexoffset);
         m_indices.push_back(face->mIndices[2]+vertindexoffset);
+
+        newMesh->m_indices.push_back(face->mIndices[0]+vertindexoffset);
+        newMesh->m_indices.push_back(face->mIndices[1]+vertindexoffset);
+        newMesh->m_indices.push_back(face->mIndices[2]+vertindexoffset);
     }
 
     newMesh->indexCount = m_indices.size() - indexCountBefore;
