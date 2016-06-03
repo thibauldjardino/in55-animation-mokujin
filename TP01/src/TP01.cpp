@@ -44,7 +44,8 @@ TP01::TP01()
     cube = new MultipleColorCube();
     camera = new Camera(15,15,15);
 
-    mokujin = new Mokujin();
+    mokujin = new Mokujin(this);
+    mokujin->setFramework(this);
     std::cout << camera->m_forwardOrientation->w << " " << camera->m_forwardOrientation->x << " " << camera->m_forwardOrientation->y << " " << camera->m_forwardOrientation->z << " " << std::endl;
 }
 
@@ -126,7 +127,7 @@ TP01::render()
 
     basis->draw();
 
-
+    //this->applyMatrix(QMatrix4x4(1,-1,1,0,-1,1,1,0,-1,-1,1,0,0,0,0,1));
         //star->draw();
     mokujin->draw();
 

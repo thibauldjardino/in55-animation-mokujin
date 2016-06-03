@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Mokujin::Mokujin():Object3D{}
+Mokujin::Mokujin(TP01 *win):Object3D{}
 {
     if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
     {
@@ -12,6 +12,7 @@ Mokujin::Mokujin():Object3D{}
         std::cout << "MOKUJIN Loaded" << std::endl;
     }
 
+    this->window = win;
     this->m_loader.getBufferData(&vertices, &normals, &indices);
 
     std::cout << "Size vertices array : " << this->vertices->size() << std::endl;
@@ -38,34 +39,26 @@ Mokujin::Mokujin():Object3D{}
 
     buildNodeList(rootNode,tabNodes);
 
-    /*for (int i=0; i<tabNodes->size(); i++) {
+    for (int i=0; i<tabNodes->size(); i++) {
 
         std::cout << "Node numero " << i << " : " << tabNodes->at(i).name.toStdString() << std::endl;
-    }*/
+    }
 }
 
 
-void Mokujin::drawNode(const Node *root)
+void Mokujin::drawNode(const Node &root)
 {
 
-    cout << "-------- DEBUGG NODE ---------" << endl;
 
-    this->m_Framework->pushMatrix();
 
-    cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
+    cout << "-------- DEBUGG NODE apres APPLY ---------" << endl;
 
-   // this->m_Framework->applyMatrix(root->transformation);
+    cout << "MESH SIZE : " << root.nbMeshes << endl;
 
-    this->m_Framework->translate(1,1,1);
-
-    cout << "-------- DEBUGG NODE apres TRANSLATE ---------" << endl;
-
-    cout << "MESH SIZE : " << root->nbMeshes << endl;
-
-    if(root->nbMeshes>0) {
+    if(!root.meshes.empty()) {
         cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
-        for (int i=0; i<root->meshes.size(); i++) {
-            this->drawMesh(root->meshes.at(i).data());
+        for (int i=0; i<root.meshes.size(); i++) {
+            this->drawMesh(root.meshes.at(i).data());
         }
     }
     else {
@@ -73,22 +66,40 @@ void Mokujin::drawNode(const Node *root)
     }
 
 
-    if(!root->nodes.empty()) {
-        for(int i=0; i<root->nodes.size(); i++) {
+    if(!root.nodes.empty()) {
+        for(int i=0; i<root.nodes.size(); i++) {
 
             cout << "-------- DEBUGG NODE lance NODE ---------" << endl;
-            this->drawNode(&root->nodes.at(i));
+            this->drawNode(root.nodes.at(i));
         }
     }
 
-    this->m_Framework->popMatrix();
+
 }
 
 void Mokujin::drawShape( const char* shader_name )
 {
+    cout << "-------- DEBUGG NODE ---------" << endl;
+
+    m_Framework->pushMatrix();
+
+    cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
+
+    //this->m_Framework->applyMatrix(root.transformation);
+
+    m_Framework->translate(10,10,10);
+
     cout << "-------- DEBUGG ---------" << endl;
 
-    this->drawNode(this->m_rootNode.data());
+    Node& rootNode = *(this->m_loader.m_rootNode.data());
+
+    QVector<Node> *tabNodes = new QVector<Node>();
+
+    buildNodeList(rootNode,tabNodes);
+
+    this->drawNode(tabNodes->at(0));
+
+    m_Framework->popMatrix();
 
 }
 

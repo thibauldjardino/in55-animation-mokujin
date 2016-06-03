@@ -15,7 +15,6 @@ void
 Object3D::draw()
 {
 
-
     if (m_Framework->useShader( "color" ))
     {
         m_Framework->computeAncillaryMatrices();
