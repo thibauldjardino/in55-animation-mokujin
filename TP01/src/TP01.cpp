@@ -127,10 +127,13 @@ TP01::render()
 
     basis->draw();
 
-    //this->applyMatrix(QMatrix4x4(1,-1,1,0,-1,1,1,0,-1,-1,1,0,0,0,0,1));
+    pushMatrix();
+    //this->applyMatrix(QMatrix4x4(1,0,0,2,0,1,0,2,0,0,1,2,0,0,0,1));
         //star->draw();
+    //translate(2,2,2);
+    scale(0.005,0.005,0.005);
     mokujin->draw();
-
+    popMatrix();
     popMatrix();
     /*pushMatrix();
     translate( -10.0, 0, 0 );

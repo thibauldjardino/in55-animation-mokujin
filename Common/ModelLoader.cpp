@@ -1,4 +1,5 @@
 #include "ModelLoader.h"
+#include <QThread>
 
 ModelLoader::ModelLoader()
 {
@@ -15,7 +16,8 @@ bool ModelLoader::Load(QString pathToFile)
                                              aiProcess_LimitBoneWeights |
                                              aiProcess_Triangulate |
                                              aiProcess_JoinIdenticalVertices |
-                                             aiProcess_SortByPType
+                                             aiProcess_SortByPType |
+                                             aiProcess_ConvertToLeftHanded
                                              );
 
     if (!scene)
@@ -192,10 +194,10 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
 {
     newNode.name = node->mName.length != 0 ? node->mName.C_Str() : "";
     //std::cout<< newNode.name.toStdString()<<std::endl;
-    QMatrix4x4 tmp = QMatrix4x4(node->mTransformation[0]);
+    newNode.transformation = QMatrix4x4(node->mTransformation[0]);
 
-    newNode.transformation = tmp;
-    //qDebug()<<newNode.transformation;
+    qDebug()<<newNode.transformation;
+    //QThread::sleep(10);
     //std::cout<< newNode.transformation.column(0).z()<<std::endl;
     newNode.nbMeshes = node->mNumMeshes;
     newNode.meshes.resize(node->mNumMeshes);

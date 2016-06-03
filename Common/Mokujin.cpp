@@ -4,7 +4,7 @@ using namespace std;
 
 Mokujin::Mokujin(TP01 *win):Object3D{}
 {
-    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.dae"))
+    if (!this->m_loader.Load("../release/Mokujin/mokujin_squelette_bound.fbx"))
     {
         std::cout << "NOT Good!" << std::endl;
     }
@@ -46,50 +46,61 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
 }
 
 
-void Mokujin::drawNode(const Node &root)
+void Mokujin::drawNode(const Node &node)
 {
 
 
 
-    cout << "-------- DEBUGG NODE apres APPLY ---------" << endl;
+   // cout << "-------- DEBUGG NODE ---------" << endl;
 
-    cout << "MESH SIZE : " << root.nbMeshes << endl;
+    m_Framework->pushMatrix();
 
-    if(!root.meshes.empty()) {
-        cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
-        for (int i=0; i<root.meshes.size(); i++) {
-            this->drawMesh(root.meshes.at(i).data());
+
+  //  cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
+
+    this->m_Framework->applyMatrix(node.transformation);
+
+    if(node.name.toStdString()=="Bone.018") {
+        this->m_Framework->applyMatrix(QMatrix4x4(cos(3.14159/3),-sin(3.14159/3),0,0,sin(3.14159/3),cos(3.14159/3),0,0,0,0,1,0,0,0,0,1));
+    }
+
+
+    m_Framework->computeAncillaryMatrices();
+    GLint var_id = glGetUniformLocation( m_Framework->getCurrentShaderId(), "MVP" );
+    m_Framework->transmitMVP( var_id );
+
+
+//    cout << "-------- DEBUGG ---------" << endl;
+
+  //  cout << "-------- DEBUGG NODE apres APPLY ---------" << endl;
+
+  //  cout << "MESH SIZE : " << root.nbMeshes << endl;
+
+    if(!node.meshes.empty()) {
+    //    cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
+        for (int i=0; i<node.meshes.size(); i++) {
+            this->drawMesh(node.meshes.at(i).data());
         }
     }
     else {
-        cout << "-------- DEBUGG NODE ne lance pas MESH ---------" << endl;
+       // cout << "-------- DEBUGG NODE ne lance pas MESH ---------" << endl;
     }
 
 
-    if(!root.nodes.empty()) {
-        for(int i=0; i<root.nodes.size(); i++) {
 
-            cout << "-------- DEBUGG NODE lance NODE ---------" << endl;
-            this->drawNode(root.nodes.at(i));
+    if(!node.nodes.empty()) {
+        for(int i=0; i<node.nodes.size(); i++) {
+
+         //   cout << "-------- DEBUGG NODE lance NODE ---------" << endl;
+            this->drawNode(node.nodes.at(i));
         }
     }
 
-
+    m_Framework->popMatrix();
 }
 
 void Mokujin::drawShape( const char* shader_name )
 {
-    cout << "-------- DEBUGG NODE ---------" << endl;
-
-    m_Framework->pushMatrix();
-
-    cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
-
-    //this->m_Framework->applyMatrix(root.transformation);
-
-    m_Framework->translate(10,10,10);
-
-    cout << "-------- DEBUGG ---------" << endl;
 
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 
@@ -98,8 +109,6 @@ void Mokujin::drawShape( const char* shader_name )
     buildNodeList(rootNode,tabNodes);
 
     this->drawNode(tabNodes->at(0));
-
-    m_Framework->popMatrix();
 
 }
 
