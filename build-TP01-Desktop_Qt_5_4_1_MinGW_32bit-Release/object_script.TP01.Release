@@ -10,10 +10,10 @@ INPUT(
 ./obj\Cylinder.o
 ./obj\Pyramid.o
 ./obj\Star.o
-./obj\TP01.o
 ./obj\main.o
 ./obj\Quaternion.o
 ./obj\Camera.o
 ./obj\Mokujin.o
 ./obj\ModelLoader.o
+./obj\MainWindow.o
 );

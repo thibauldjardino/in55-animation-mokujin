@@ -6,12 +6,12 @@
 #include <iostream>
 #include <qthread.h>
 #include "GlWindow.h"
-#include "TP01.h"
+#include "MainWindow.h"
 
 class Mokujin : public Object3D
 {
 public:
-    Mokujin(TP01 *win);
+    Mokujin();
 protected:
     void drawShape( const char* shader_name );
     void drawNode(const Node &node);
@@ -28,7 +28,6 @@ protected:
     QVector<float> *normals;
     QVector<unsigned int> *indices;
     QSharedPointer<Node> m_rootNode;
-    TP01 *window;
 
 };
 

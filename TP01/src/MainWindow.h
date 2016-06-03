@@ -1,15 +1,15 @@
-﻿#ifndef TP01_h
-#define TP01_h
+﻿#ifndef MainWindow_h
+#define MainWindow_h
 
 
 #include "GlWindow.h"
 
 
-class TP01 : public GlWindow
+class MainWindow : public GlWindow
 {
 	public:
-		TP01();
-        ~TP01();
+        MainWindow();
+        ~MainWindow();
 
 		/*!
 		*\brief Initialization des objets.

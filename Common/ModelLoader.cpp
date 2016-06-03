@@ -193,12 +193,7 @@ QSharedPointer<MaterialInfo> ModelLoader::processMaterial(aiMaterial *material)
 void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNode, Node &newNode)
 {
     newNode.name = node->mName.length != 0 ? node->mName.C_Str() : "";
-    //std::cout<< newNode.name.toStdString()<<std::endl;
     newNode.transformation = QMatrix4x4(node->mTransformation[0]);
-
-    qDebug()<<newNode.transformation;
-    //QThread::sleep(10);
-    //std::cout<< newNode.transformation.column(0).z()<<std::endl;
     newNode.nbMeshes = node->mNumMeshes;
     newNode.meshes.resize(node->mNumMeshes);
 
