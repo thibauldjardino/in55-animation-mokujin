@@ -27,15 +27,15 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 
-    /*for (int i=0; i<nbMeshes; i++) {
+    for (int i=0; i<nbMeshes; i++) {
 
         std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
         //this->drawMesh(tabMeshes[i]);
         //qDebug()<<tabMeshes[i].data()->m_indices;
         //QThread::sleep(1000);
     }
-    cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
-    */
+    //cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
+
 
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 
@@ -58,7 +58,6 @@ void Mokujin::drawNode(const Node &node)
    // cout << "-------- DEBUGG NODE ---------" << endl;
 
     m_Framework->pushMatrix();
-this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg");
 
   //  cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
 
@@ -80,6 +79,12 @@ this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg")
     if(!node.meshes.empty()) {
     //    cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
         for (int i=0; i<node.meshes.size(); i++) {
+           //qDebug() << node.meshes.at(i).data()->name;
+           if(strstr(node.meshes.at(i).data()->name.toStdString().c_str(), "Cylinder")){
+               this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg");
+           }else{
+               this->m_Framework->createTexture("../release/texture/metal-textures.jpg");
+           }
             this->drawMesh(node.meshes.at(i).data());
         }
     }

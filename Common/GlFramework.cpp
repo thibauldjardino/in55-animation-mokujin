@@ -526,8 +526,9 @@ GLuint
 GlFramework::createTexture( const char* filename )
 {
 	GLuint texId = 0;
+    GLuint textId_2 = 1;
 	QImage image;
-
+    QImage image2;
 	if (strstr( filename, "cubemap_" ))
 	{
 		lf::String name;
@@ -557,14 +558,14 @@ GlFramework::createTexture( const char* filename )
 			}
 		}
 	}
-	else if (strstr( filename, "tex2d_" ))
+    else if (strstr( filename, "wood-textures" ))
 	{
 		if (image.load( filename ))
 		{
 			image = QGLWidget::convertToGLFormat( image );
 
 			glGenTextures( 1, &texId );
-			cout << "Texture #" << texId << ": " << filename << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
+            //cout << "Texture #" << texId << ": " << filename << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
 
 //			glEnable( GL_TEXTURE_2D );
 			glBindTexture( GL_TEXTURE_2D, texId );
@@ -573,6 +574,22 @@ GlFramework::createTexture( const char* filename )
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
 	}
+    else if (strstr( filename, "metal-textures" ))
+    {
+        if (image.load( filename ))
+        {
+            image2 = QGLWidget::convertToGLFormat( image );
+
+            glGenTextures( 1, &textId_2 );
+            //cout << "Texture #" << texId << ": " << filename << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
+
+//			glEnable( GL_TEXTURE_2D );
+            glBindTexture( GL_TEXTURE_2D, textId_2 );
+            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        }
+    }
 	else if (strstr( filename, "tex1d_" ))
 	{
 		if (image.load( filename ))
