@@ -36,7 +36,8 @@ HEADERS += \
     src/TP01.h \
     ../Common/Mokujin.h \
     ../Common/ModelLoader.h \
-    ../Common/Materialnfo.h
+    ../Common/Materialnfo.h \
+    ../Common/sdlglutils.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \

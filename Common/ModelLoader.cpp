@@ -196,7 +196,7 @@ void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNo
     //std::cout<< newNode.name.toStdString()<<std::endl;
     newNode.transformation = QMatrix4x4(node->mTransformation[0]);
 
-    qDebug()<<newNode.transformation;
+    //qDebug()<<newNode.transformation;
     //QThread::sleep(10);
     //std::cout<< newNode.transformation.column(0).z()<<std::endl;
     newNode.nbMeshes = node->mNumMeshes;

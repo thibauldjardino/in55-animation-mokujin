@@ -23,7 +23,7 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 
-    for (int i=0; i<nbMeshes; i++) {
+    /*for (int i=0; i<nbMeshes; i++) {
 
         std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
         //this->drawMesh(tabMeshes[i]);
@@ -31,7 +31,7 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
         //QThread::sleep(1000);
     }
     cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
-
+    */
 
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 
@@ -39,10 +39,10 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
 
     buildNodeList(rootNode,tabNodes);
 
-    for (int i=0; i<tabNodes->size(); i++) {
+    /*for (int i=0; i<tabNodes->size(); i++) {
 
         std::cout << "Node numero " << i << " : " << tabNodes->at(i).name.toStdString() << std::endl;
-    }
+    }*/
 }
 
 
@@ -54,7 +54,7 @@ void Mokujin::drawNode(const Node &node)
    // cout << "-------- DEBUGG NODE ---------" << endl;
 
     m_Framework->pushMatrix();
-
+this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg");
 
   //  cout << "-------- DEBUGG NODE apres PUSH ---------" << endl;
 
@@ -117,7 +117,7 @@ void Mokujin::drawMesh( const Mesh *mesh) {
     glEnableVertexAttribArray( 0 );
 
     glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-    glDrawElements( GL_LINES, mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
+    glDrawElements( GL_TRIANGLES, mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
 
     glDisableVertexAttribArray( 0 );
 }

@@ -590,7 +590,9 @@ GlFramework::createTexture( const char* filename )
 			glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP );
 		}
-	}
+    }
+
+
 
 	return texId;
 }
