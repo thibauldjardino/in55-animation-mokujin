@@ -33,10 +33,10 @@ HEADERS += \
     ../Common/Shapes/Star.h \
     ../Common/Quaternion.h \
     ../Common/Camera.h \
+    src/TP01.h \
     ../Common/Mokujin.h \
     ../Common/ModelLoader.h \
-    ../Common/Materialnfo.h \
-    src/MainWindow.h
+    ../Common/Materialnfo.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -50,9 +50,9 @@ SOURCES += \
     ../Common/Shapes/Cylinder.cpp \
     ../Common/Shapes/Pyramid.cpp \
     ../Common/Shapes/Star.cpp \
+    src/TP01.cpp \
     src/main.cpp \
     ../Common/Quaternion.cpp \
     ../Common/Camera.cpp \
     ../Common/Mokujin.cpp \
-    ../Common/ModelLoader.cpp \
-    src/MainWindow.cpp
+    ../Common/ModelLoader.cpp

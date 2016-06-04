@@ -10,7 +10,7 @@
 //*****************************************************************************
 
 
-#include "MainWindow.h"
+#include "TP01.h"
 
 #include <QApplication>
 
@@ -18,7 +18,8 @@
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
-    MainWindow win;
+	TP01 win;
+  //  win.setGeometry(200,200,200,200);
 	win.show();
 	return app.exec();
 }
