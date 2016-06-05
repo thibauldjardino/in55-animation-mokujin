@@ -12,6 +12,10 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
         std::cout << "MOKUJIN Loaded" << std::endl;
     }
 
+    this->currentAnimation = 0;
+    this->currentTime = -1;
+    this->timeStep = 1/30;
+
     this->window = win;
     this->m_loader.getBufferData(&vertices, &normals, &indices);
 
@@ -60,9 +64,6 @@ this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg")
 
     this->m_Framework->applyMatrix(node.transformation);
 
-    if(node.name.toStdString()=="Bone.018") {
-        this->m_Framework->applyMatrix(QMatrix4x4(cos(3.14159/3),-sin(3.14159/3),0,0,sin(3.14159/3),cos(3.14159/3),0,0,0,0,1,0,0,0,0,1));
-    }
 
 
     m_Framework->computeAncillaryMatrices();

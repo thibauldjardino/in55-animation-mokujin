@@ -19,6 +19,18 @@ protected:
 
     void buildNodeList (const Node &root, QVector<Node> *list);
 
+    //Marche
+    QMatrix4x4 animation1(const Node &node);
+
+    //Rotation du buste
+    QMatrix4x4 animation2(const Node &node);
+
+
+    QMatrix4x4 animation3(const Node &node);
+
+
+    QMatrix4x4 animation4(const Node &node);
+
 protected:
     ModelLoader              m_loader;
     QMatrix4x4 m_projection, m_view;
@@ -29,6 +41,10 @@ protected:
     QVector<unsigned int> *indices;
     QSharedPointer<Node> m_rootNode;
     TP01 *window;
+
+    std::string currentAnimation;
+    float currentTime;
+    float timeStep;
 
 };
 

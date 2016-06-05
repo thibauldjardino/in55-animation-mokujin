@@ -155,6 +155,14 @@ TP01::render()
     cube->draw();
     popMatrix();
     popMatrix();*/
+
+    if(mokujin->currentTime>=0 && mokujin->currentTime<1 && mokujin->currentAnimation!=0) {
+        mokujin->currentTime+=mokujin->timeStep;
+    }
+    else if(mokujin->currentTime>1) {
+        mokujin->currentTime = 0;
+    }
+
 }
 
 
@@ -220,5 +228,27 @@ TP01::keyPressEvent( QKeyEvent* event )
         camera->rotateZ(g_AngleSpeed);
         break;
 
+    case Qt::Key_0:
+        mokujin->currentAnimation=0;
+        mokujin->currentTime=-1;
+        break;
+
+    case Qt::Key_1:
+        //Marche
+        mokujin->currentAnimation=1;
+        break;
+
+    case Qt::Key_2:
+        //Rotation du buste
+        mokujin->currentAnimation=2;
+        break;
+
+    case Qt::Key_3:
+        mokujin->currentAnimation=3;
+        break;
+
+    case Qt::Key_4:
+        mokujin->currentAnimation=4;
+        break;
     }
 }
