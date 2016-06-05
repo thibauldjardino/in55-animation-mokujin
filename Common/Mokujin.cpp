@@ -53,7 +53,7 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
 void Mokujin::drawNode(const Node &node)
 {
 
-
+    this->m_Framework->createTexture("");
 
    // cout << "-------- DEBUGG NODE ---------" << endl;
 
@@ -79,10 +79,11 @@ void Mokujin::drawNode(const Node &node)
     if(!node.meshes.empty()) {
     //    cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
         for (int i=0; i<node.meshes.size(); i++) {
-           //qDebug() << node.meshes.at(i).data()->name;
-           if(strstr(node.meshes.at(i).data()->name.toStdString().c_str(), "Cylinder")){
+           qDebug() << node.meshes.at(i).data()->name;
+           //QThread::sleep(1);
+           if(!strcmp(node.meshes.at(i).data()->name.toStdString().c_str(), "Sphere.022")){
                this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg");
-           }else{
+           }else if (!strcmp(node.meshes.at(i).data()->name.toStdString().c_str(), "Cylinder.006")){
                this->m_Framework->createTexture("../release/texture/metal-textures.jpg");
            }
             this->drawMesh(node.meshes.at(i).data());
