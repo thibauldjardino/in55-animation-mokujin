@@ -156,7 +156,7 @@ TP01::render()
     popMatrix();
     popMatrix();*/
 
-    if(mokujin->currentTime>=0 && mokujin->currentTime<1 && mokujin->currentAnimation!=0) {
+    if(mokujin->currentTime>=0 && mokujin->currentTime<1 && mokujin->currentAnimation.length()!=0) {
         mokujin->currentTime+=mokujin->timeStep;
     }
     else if(mokujin->currentTime>1) {
@@ -229,7 +229,7 @@ TP01::keyPressEvent( QKeyEvent* event )
         break;
 
     case Qt::Key_0:
-        mokujin->currentAnimation=0;
+        mokujin->currentAnimation="";
         mokujin->currentTime=-1;
         break;
 

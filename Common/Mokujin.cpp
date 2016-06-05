@@ -12,7 +12,7 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
         std::cout << "MOKUJIN Loaded" << std::endl;
     }
 
-    this->currentAnimation = 0;
+    this->currentAnimation = "";
     this->currentTime = -1;
     this->timeStep = 1/30;
 

@@ -12,6 +12,9 @@ class Mokujin : public Object3D
 {
 public:
     Mokujin(TP01 *win);
+    std::string currentAnimation;
+    float currentTime;
+    float timeStep;
 protected:
     void drawShape( const char* shader_name );
     void drawNode(const Node &node);
@@ -31,6 +34,8 @@ protected:
 
     QMatrix4x4 animation4(const Node &node);
 
+
+
 protected:
     ModelLoader              m_loader;
     QMatrix4x4 m_projection, m_view;
@@ -42,9 +47,7 @@ protected:
     QSharedPointer<Node> m_rootNode;
     TP01 *window;
 
-    std::string currentAnimation;
-    float currentTime;
-    float timeStep;
+
 
 };
 
