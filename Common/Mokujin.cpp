@@ -12,9 +12,10 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
         std::cout << "MOKUJIN Loaded" << std::endl;
     }
 
+    this->nbFrames = 60;
     this->currentAnimation = "";
     this->currentTime = -1;
-    this->timeStep = 1/30;
+    this->timeStep = 1/(1.0f*this->nbFrames);
 
     this->window = win;
     this->m_loader.getBufferData(&vertices, &normals, &indices);
@@ -63,7 +64,9 @@ void Mokujin::drawNode(const Node &node)
 
     this->m_Framework->applyMatrix(node.transformation);
 
-
+    if(this->currentAnimation=="2") {
+        this->animation2(node);
+    }
 
     m_Framework->computeAncillaryMatrices();
     GLint var_id = glGetUniformLocation( m_Framework->getCurrentShaderId(), "MVP" );
@@ -86,6 +89,7 @@ void Mokujin::drawNode(const Node &node)
            }else if (!strcmp(node.meshes.at(i).data()->name.toStdString().c_str(), "Cylinder.006")){
                this->m_Framework->createTexture("../release/texture/metal-textures.jpg");
            }
+
             this->drawMesh(node.meshes.at(i).data());
         }
     }
@@ -143,4 +147,17 @@ void Mokujin::buildNodeList (const Node & root, QVector<Node> *list) {
         std::cout << "Nom : " <<root.nodes.at(i).name.toStdString() << std::endl;
         buildNodeList(root.nodes.at(i));
     }*/
+}
+
+QMatrix4x4 Mokujin::animation2(const Node &node) {
+
+   if(node.name.toStdString()=="Armature") {
+        this->m_Framework->rotate(this->currentTime*360.0*this->timeStep,0,0,1);
+   }
+   else if (node.name.toStdString()=="Bone.001"){
+        this->m_Framework->rotate(this->currentTime*(-360.0)*this->timeStep,0,0,1);
+   }
+
+
+
 }

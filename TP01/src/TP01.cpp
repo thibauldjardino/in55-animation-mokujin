@@ -135,6 +135,8 @@ TP01::render()
     mokujin->draw();
     popMatrix();
     popMatrix();
+
+    mokujin->currentTime+=mokujin->timeStep;
     /*pushMatrix();
     translate( -10.0, 0, 0 );
 
@@ -156,10 +158,7 @@ TP01::render()
     popMatrix();
     popMatrix();*/
 
-    if(mokujin->currentTime>=0 && mokujin->currentTime<1 && mokujin->currentAnimation.length()!=0) {
-        mokujin->currentTime+=mokujin->timeStep;
-    }
-    else if(mokujin->currentTime>1) {
+    if(mokujin->currentTime>1) {
         mokujin->currentTime = 0;
     }
 
@@ -235,20 +234,20 @@ TP01::keyPressEvent( QKeyEvent* event )
 
     case Qt::Key_1:
         //Marche
-        mokujin->currentAnimation=1;
+        mokujin->currentAnimation="1";
         break;
 
     case Qt::Key_2:
         //Rotation du buste
-        mokujin->currentAnimation=2;
+        mokujin->currentAnimation="2";
         break;
 
     case Qt::Key_3:
-        mokujin->currentAnimation=3;
+        mokujin->currentAnimation="3";
         break;
 
     case Qt::Key_4:
-        mokujin->currentAnimation=4;
+        mokujin->currentAnimation="4";
         break;
     }
 }

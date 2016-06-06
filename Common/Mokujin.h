@@ -15,6 +15,8 @@ public:
     std::string currentAnimation;
     float currentTime;
     float timeStep;
+    unsigned int nbFrames;
+
 protected:
     void drawShape( const char* shader_name );
     void drawNode(const Node &node);
