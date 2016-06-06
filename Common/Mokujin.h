@@ -30,7 +30,7 @@ protected:
     //Rotation du buste
     QMatrix4x4 animation2(const Node &node);
 
-
+    //Saut groupé
     QMatrix4x4 animation3(const Node &node);
 
 

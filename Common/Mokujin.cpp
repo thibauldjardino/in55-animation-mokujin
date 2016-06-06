@@ -28,13 +28,13 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
     const QSharedPointer<Mesh> *tabMeshes = this->m_loader.m_meshes.constData();
     int nbMeshes = this->m_loader.m_meshes.size();
 
-    for (int i=0; i<nbMeshes; i++) {
+    //for (int i=0; i<nbMeshes; i++) {
 
-        std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
+        //std::cout << "Mesh numero " << i << " : " << tabMeshes[i].data()->name.toStdString() << ", Indexes : " << tabMeshes[i].data()->indexCount << " " << tabMeshes[i].data()->indexOffset << std::endl;
         //this->drawMesh(tabMeshes[i]);
         //qDebug()<<tabMeshes[i].data()->m_indices;
         //QThread::sleep(1000);
-    }
+   // }
     //cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
 
 
@@ -82,7 +82,7 @@ void Mokujin::drawNode(const Node &node)
     if(!node.meshes.empty()) {
     //    cout << "-------- DEBUGG NODE lance MESH ---------" << endl;
         for (int i=0; i<node.meshes.size(); i++) {
-           qDebug() << node.meshes.at(i).data()->name;
+          // qDebug() << node.meshes.at(i).data()->name;
            //QThread::sleep(1);
            if(!strcmp(node.meshes.at(i).data()->name.toStdString().c_str(), "Sphere.022")){
                this->m_Framework->createTexture("../release/texture/tex2d_wood-textures-2.jpg");
@@ -152,12 +152,7 @@ void Mokujin::buildNodeList (const Node & root, QVector<Node> *list) {
 QMatrix4x4 Mokujin::animation2(const Node &node) {
 
    if(node.name.toStdString()=="Armature") {
-        this->m_Framework->rotate(this->currentTime*360.0*this->timeStep,0,0,1);
+        this->m_Framework->rotate(360*this->currentTime,0,0,1);
    }
-   else if (node.name.toStdString()=="Bone.001"){
-        this->m_Framework->rotate(this->currentTime*(-360.0)*this->timeStep,0,0,1);
-   }
-
-
 
 }

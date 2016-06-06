@@ -128,15 +128,15 @@ TP01::render()
     basis->draw();
 
     pushMatrix();
-    //this->applyMatrix(QMatrix4x4(1,0,0,2,0,1,0,2,0,0,1,2,0,0,0,1));
-        //star->draw();
-    //translate(2,2,2);
+
     scale(0.005,0.005,0.005);
     mokujin->draw();
     popMatrix();
     popMatrix();
 
-    mokujin->currentTime+=mokujin->timeStep;
+    cout<<"current time : "<<mokujin->currentTime<<endl;
+    cout<<"time step : "<<mokujin->timeStep<<endl;
+
     /*pushMatrix();
     translate( -10.0, 0, 0 );
 
@@ -157,6 +157,11 @@ TP01::render()
     cube->draw();
     popMatrix();
     popMatrix();*/
+
+
+    if(mokujin->currentAnimation!="") {
+        mokujin->currentTime+=mokujin->timeStep;
+    }
 
     if(mokujin->currentTime>1) {
         mokujin->currentTime = 0;
@@ -235,19 +240,25 @@ TP01::keyPressEvent( QKeyEvent* event )
     case Qt::Key_1:
         //Marche
         mokujin->currentAnimation="1";
+        mokujin->currentTime=0;
         break;
 
     case Qt::Key_2:
         //Rotation du buste
         mokujin->currentAnimation="2";
+        mokujin->currentTime=0;
         break;
 
+        //Saut groupé
     case Qt::Key_3:
         mokujin->currentAnimation="3";
+        mokujin->currentTime=0;
         break;
 
+        //Grand écart plus mains en garde
     case Qt::Key_4:
         mokujin->currentAnimation="4";
+        mokujin->currentTime=0;
         break;
     }
 }

@@ -585,6 +585,8 @@ GlFramework::createTexture( const char* filename )
 
 //			glEnable( GL_TEXTURE_2D );
             glBindTexture( GL_TEXTURE_2D, textId_2 );
+            //glBindBuffer(GL_TEXTURE_2D,(int)image.bits());
+            glDrawArrays(GL_TRIANGLES,0,1000);
             glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
