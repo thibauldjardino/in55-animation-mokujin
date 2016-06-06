@@ -159,13 +159,13 @@ TP01::render()
     popMatrix();*/
 
 
-    if(mokujin->currentAnimation!="") {
+    if(mokujin->currentAnimation!="" && mokujin->currentTime<1) {
         mokujin->currentTime+=mokujin->timeStep;
     }
 
-    if(mokujin->currentTime>1) {
+    /*if(mokujin->currentTime>1) {
         mokujin->currentTime = 0;
-    }
+    }*/
 
 }
 
