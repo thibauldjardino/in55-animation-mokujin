@@ -66,6 +66,8 @@ void Mokujin::drawNode(const Node &node)
 
     if(this->currentAnimation=="2") {
         this->animation2(node);
+    } else if(this->currentAnimation=="4") {
+        this->animation4(node);
     }
 
     m_Framework->computeAncillaryMatrices();
@@ -149,10 +151,40 @@ void Mokujin::buildNodeList (const Node & root, QVector<Node> *list) {
     }*/
 }
 
-QMatrix4x4 Mokujin::animation2(const Node &node) {
+void Mokujin::animation2(const Node &node) {
 
    if(node.name.toStdString()=="Armature") {
         this->m_Framework->rotate(360*this->currentTime,0,0,1);
    }
+
+}
+
+//Grand écart
+void Mokujin::animation4(const Node &node) {
+
+    //Tout le corps
+    if(node.name.toStdString()=="Armature") {
+        this->m_Framework->translate(0,0,this->currentTime*6);
+    }
+    //Jambe gauche
+    else if(node.name.toStdString()=="Bone.003") {
+        this->m_Framework->translate(0,this->currentTime/2.0,this->currentTime*2.4);
+        this->m_Framework->rotate(-this->currentTime*75,1,0,0);
+    }
+    //Jambe droite
+    else if(node.name.toStdString()=="Bone.002") {
+        this->m_Framework->translate(0,-this->currentTime/2.0,this->currentTime*2.4);
+        this->m_Framework->rotate(-this->currentTime*75,1,0,0);
+    }
+    //Pied droit
+    else if(node.name.toStdString()=="Bone.012") {
+        this->m_Framework->rotate(-this->currentTime*90,0,0.258819,0.965929);
+    }
+    //Pied gauche
+    else if(node.name.toStdString()=="Bone.015") {
+        this->m_Framework->rotate(this->currentTime*90,-0,0.258819,0.965929);
+    }
+
+
 
 }

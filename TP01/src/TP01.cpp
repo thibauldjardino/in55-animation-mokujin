@@ -42,7 +42,7 @@ TP01::TP01()
     pyr = new Pyramid( 5, 2.0, 10.0 );
     cyl = new Cylinder( 32, 1.5, 0.0, 10.0 );
     cube = new MultipleColorCube();
-    camera = new Camera(15,15,15);
+    camera = new Camera(5,5,5);
 
     mokujin = new Mokujin(this);
     mokujin->setFramework(this);
