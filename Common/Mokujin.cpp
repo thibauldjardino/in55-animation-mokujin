@@ -121,13 +121,7 @@ void Mokujin::drawNode(const Node &node)
 void Mokujin::drawShape( const char* shader_name )
 {
 
-    Node& rootNode = *(this->m_loader.m_rootNode.data());
-
-    QVector<Node> *tabNodes = new QVector<Node>();
-
-    buildNodeList(rootNode,tabNodes);
-
-    this->drawNode(tabNodes->at(0));
+    this->drawNode(*(this->m_loader.m_rootNode.data()));
 
 }
 
