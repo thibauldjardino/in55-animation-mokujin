@@ -191,9 +191,9 @@ void Mokujin::animation4(const Node &node) {
 
         this->m_Framework->applyMatrix(inverse);
 
-        this->m_Framework->rotate(-this->currentTime*100,0,1,0);
-        this->m_Framework->rotate(-this->currentTime*30,0,0,1);
-        this->m_Framework->translate(-this->currentTime*5.3,-this->currentTime*0.9,-this->currentTime*2.5);
+        this->m_Framework->rotate(-this->currentTime*90,0,1,0);
+        this->m_Framework->rotate(-this->currentTime*15,0,0,1);
+        this->m_Framework->translate(-this->currentTime*3.9,0,-this->currentTime*2.5);
         this->m_Framework->applyMatrix(node.transformation);
 
     }
@@ -203,8 +203,8 @@ void Mokujin::animation4(const Node &node) {
 
         this->m_Framework->applyMatrix(inverse);
 
-        this->m_Framework->rotate(this->currentTime*100,0,1,0);
-        this->m_Framework->translate(this->currentTime*3.5,0,-this->currentTime*2.5);
+        this->m_Framework->rotate(this->currentTime*90,0,1,0);
+        this->m_Framework->translate(this->currentTime*2.9,0,-this->currentTime*2.5);
         this->m_Framework->applyMatrix(node.transformation);
     }
     //Main droite
@@ -215,23 +215,10 @@ void Mokujin::animation4(const Node &node) {
         this->m_Framework->applyMatrix(inverse);
 
         this->m_Framework->rotate(-this->currentTime*70,1,0,0);
-        this->m_Framework->translate(this->currentTime*0.0,-this->currentTime*2.4,this->currentTime*3);
+        this->m_Framework->translate(-this->currentTime*0.5,-this->currentTime*2.5,this->currentTime*3);
         this->m_Framework->applyMatrix(node.transformation);
 
     }
-    //Main gauche
-    else if(node.name.toStdString()=="Bone.019") {
-
-        QMatrix4x4 inverse = node.transformation.inverted();
-
-        this->m_Framework->applyMatrix(inverse);
-
-        this->m_Framework->rotate(-this->currentTime*70,1,0,0);
-        this->m_Framework->translate(this->currentTime*0.0,-this->currentTime*2.4,this->currentTime*3);
-        this->m_Framework->applyMatrix(node.transformation);
-
-    }
-
 
 
 }

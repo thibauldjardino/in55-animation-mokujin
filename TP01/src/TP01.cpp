@@ -134,9 +134,6 @@ TP01::render()
     popMatrix();
     popMatrix();
 
-    cout<<"current time : "<<mokujin->currentTime<<endl;
-    cout<<"time step : "<<mokujin->timeStep<<endl;
-
     /*pushMatrix();
     translate( -10.0, 0, 0 );
 
