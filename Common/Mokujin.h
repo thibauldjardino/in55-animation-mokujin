@@ -25,13 +25,13 @@ protected:
     void buildNodeList (const Node &root, QVector<Node> *list);
 
     //Marche
-    QMatrix4x4 animation1(const Node &node);
+    void animation1(const Node &node);
 
     //Rotation du buste
     void animation2(const Node &node);
 
     //Saut groupé
-    QMatrix4x4 animation3(const Node &node);
+    void animation3(const Node &node);
 
     //Grand écart
     void animation4(const Node &node);

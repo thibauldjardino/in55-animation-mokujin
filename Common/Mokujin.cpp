@@ -130,7 +130,7 @@ void Mokujin::drawMesh( const Mesh *mesh) {
     glEnableVertexAttribArray( 0 );
 
     glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-    glDrawElements( GL_TRIANGLES, mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
+    glDrawElements( GL_LINES, mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
 
     glDisableVertexAttribArray( 0 );
 }
@@ -182,9 +182,30 @@ void Mokujin::animation4(const Node &node) {
     }
     //Pied gauche
     else if(node.name.toStdString()=="Bone.015") {
-        this->m_Framework->rotate(this->currentTime*90,-0,0.258819,0.965929);
+        this->m_Framework->rotate(this->currentTime*90,0,0.258819,0.965929);
     }
+    //Bras droit
+    else if(node.name.toStdString()=="Bone.020") {
 
+        QMatrix4x4 inverse = node.transformation.inverted();
+
+        this->m_Framework->applyMatrix(inverse);
+
+        this->m_Framework->rotate(-this->currentTime*90,0,1,0);
+        this->m_Framework->translate(-this->currentTime*2.7,0,-this->currentTime*2.5);
+        this->m_Framework->applyMatrix(node.transformation);
+
+    }
+    //Bras gras
+    else if(node.name.toStdString()=="Bone.017") {
+        QMatrix4x4 inverse = node.transformation.inverted();
+
+        this->m_Framework->applyMatrix(inverse);
+
+        this->m_Framework->rotate(this->currentTime*90,0,1,0);
+        this->m_Framework->translate(this->currentTime*2.7,0,-this->currentTime*2.5);
+        this->m_Framework->applyMatrix(node.transformation);
+    }
 
 
 }
