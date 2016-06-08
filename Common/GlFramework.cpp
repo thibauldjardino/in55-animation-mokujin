@@ -523,100 +523,78 @@ char* cubemaps[] =
 
 
 GLuint
-GlFramework::createTexture( const char* filename )
+GlFramework::createTexture( const char* name )
 {
 	GLuint texId = 0;
-    GLuint textId_2 = 1;
-	QImage image;
-    QImage image2;
-	if (strstr( filename, "cubemap_" ))
-	{
-		lf::String name;
+    GLuint texId2 = 1;
+    GLuint texId3 = 2;
 
-		glGenTextures( 1, &texId );
-		cout << "Texture #" << texId << ": " << filename << " loaded!" << endl;
+    if(!load_Image){
 
-//		glEnable( GL_TEXTURE_CUBE_MAP );
-		glBindTexture( GL_TEXTURE_CUBE_MAP, texId );
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP);
+         m_Image_wood.load( "../release/texture/wood-textures.jpg" );
+         m_Image_wood = QGLWidget::convertToGLFormat( m_Image_wood );
 
-		for( uint32 i = 0; i < 6; ++i )
-		{
-			name = filename;
-			name += cubemaps[i];
+         m_Image_metal.load( "../release/texture/metal-textures.jpg" );
+         m_Image_metal= QGLWidget::convertToGLFormat( m_Image_metal );
 
-			if (image.load( name.c_str() ))
-			{
-				cout << name.c_str() << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
+         m_Image_rubis.load("../release/texture/yeux-textures.jpg");
+         m_Image_rubis = QGLWidget::convertToGLFormat( m_Image_metal );
 
-				image = QGLWidget::convertToGLFormat( image );
-				glTexImage2D( GL_TEXTURE_CUBE_MAP_POSITIVE_X+i, 0, GL_RGBA, image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
-			}
-		}
-	}
-    else if (strstr( filename, "wood-textures" ))
-	{
-		if (image.load( filename ))
-		{
-			image = QGLWidget::convertToGLFormat( image );
 
-			glGenTextures( 1, &texId );
-            //cout << "Texture #" << texId << ": " << filename << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
+         load_Image = true;
+    }
 
-//			glEnable( GL_TEXTURE_2D );
-			glBindTexture( GL_TEXTURE_2D, texId );
-			glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		}
-	}
-    else if (strstr( filename, "metal-textures" ))
+ if (!strcmp( name, "rubis" ))
     {
-        if (image.load( filename ))
-        {
-            image2 = QGLWidget::convertToGLFormat( image );
 
-            glGenTextures( 1, &textId_2 );
-            //cout << "Texture #" << texId << ": " << filename << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
+            glGenTextures( 3, &texId2 );
 
 //			glEnable( GL_TEXTURE_2D );
-            glBindTexture( GL_TEXTURE_2D, textId_2 );
-            //glBindBuffer(GL_TEXTURE_2D,(int)image.bits());
-            glDrawArrays(GL_TRIANGLES,0,1000);
-            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image.width(), image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
+            glBindTexture( GL_TEXTURE_2D, texId2 );
+            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_Image_rubis.width(), m_Image_rubis.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image_rubis.bits() );
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+
+    }else if (!strcmp( name, "wood" ))
+    {
+
+
+
+
+            glGenTextures( 2, &texId3 );
+
+//			glEnable( GL_TEXTURE_2D );
+            glBindTexture( GL_TEXTURE_2D, texId3 );
+            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_Image_wood.width(), m_Image_wood.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image_wood.bits() );
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+
+    } else   if(!strcmp( name, "metal" )){
+
+
+
+        glGenTextures( 1, &texId );
+
+//			glEnable( GL_TEXTURE_2D );
+        glBindTexture( GL_TEXTURE_2D, texId );
+        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_Image_metal.width(), m_Image_metal.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image_metal.bits() );
+
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         }
-    }
-	else if (strstr( filename, "tex1d_" ))
-	{
-		if (image.load( filename ))
-		{
-			image = QGLWidget::convertToGLFormat( image );
-
-			glGenTextures( 1, &texId );
-			cout << "Texture #" << texId << ": " << filename << " (" << image.width() << "," << image.height() << ") loaded!" << endl;
-
-//			glDisable( GL_TEXTURE_CUBE_MAP );
-//			glEnable( GL_TEXTURE_1D );
-			glBindTexture( GL_TEXTURE_1D, texId );
-			glTexImage1D( GL_TEXTURE_1D, 0, GL_RGBA, image.width(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
-			glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-		}
-    }else if(!strcmp( filename, "" )){
-         glBindTexture( GL_TEXTURE_2D, NULL );
-
-    }
 
 
-
-	return texId;
+    return texId;
 }
+
 
 

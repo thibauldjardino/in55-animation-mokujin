@@ -79,6 +79,10 @@ class GlFramework : public AbstractFramework
 		std::vector<std::string> m_ShaderNames;
 		std::vector<GLint> m_Shader;
 		GLint m_CurrentShader;
+		QImage m_Image_wood;
+        QImage m_Image_metal;
+        QImage m_Image_rubis;
+        bool load_Image;
 };
 
 
