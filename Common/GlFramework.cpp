@@ -530,7 +530,7 @@ GlFramework::createTexture( const char* name )
     GLuint texId3 = 2;
 
     if(!load_Image){
-
+        glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
          m_Image_wood.load( "../release/texture/wood-textures.jpg" );
          m_Image_wood = QGLWidget::convertToGLFormat( m_Image_wood );
 
