@@ -47,6 +47,10 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
        eye->load("../release/texture/yeux-textures.jpg");
 
 
+       nose = new Texture();
+       nose->load("../release/texture/nez-textures.jpg");
+
+
     Node& rootNode = *(this->m_loader.m_rootNode.data());
 
     QVector<Node> *tabNodes = new QVector<Node>();
@@ -263,7 +267,7 @@ void Mokujin::drawMesh( const Mesh *mesh) {
            }
 
           //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-          metal->drawShape( tmp.size(), tmp.data());
+          nose->drawShape( tmp.size(), tmp.data());
           tmp.clear();
           for(int i =905;i<30307;i++){
               tmp.push_back(mesh->m_indices[i]);

@@ -53,6 +53,7 @@ protected:
     Texture *wood;
     Texture *metal;
     Texture *eye;
+    Texture *nose;
 
 
 
