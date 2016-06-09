@@ -38,7 +38,7 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
     //cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
 
     wood = new Texture();
-       wood->load("../release/texture/wood-textures.jpg");
+       wood->loadSOIL("../release/texture/ecorse-textures.jpg");
 
        metal = new Texture();
        metal->load("../release/texture/metal-textures.jpg");

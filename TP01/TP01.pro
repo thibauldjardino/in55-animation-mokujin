@@ -38,7 +38,13 @@ HEADERS += \
     ../Common/ModelLoader.h \
     ../Common/Materialnfo.h \
     ../Common/sdlglutils.h \
-    ../Common/texture.h
+    ../Common/texture.h \
+    ../Common/image_DXT.h \
+    ../Common/image_helper.h \
+    ../Common/SOIL.h \
+    ../Common/stb_image_aug.h \
+    ../Common/stbi_DDS_aug.h \
+    ../Common/stbi_DDS_aug_c.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -58,4 +64,8 @@ SOURCES += \
     ../Common/Camera.cpp \
     ../Common/Mokujin.cpp \
     ../Common/ModelLoader.cpp \
-    ../Common/texture.cpp
+    ../Common/texture.cpp \
+    ../Common/image_DXT.c \
+    ../Common/image_helper.c \
+    ../Common/SOIL.c \
+    ../Common/stb_image_aug.c

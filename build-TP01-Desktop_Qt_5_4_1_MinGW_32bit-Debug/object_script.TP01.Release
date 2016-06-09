@@ -17,4 +17,8 @@ INPUT(
 ./obj\Mokujin.o
 ./obj\ModelLoader.o
 ./obj\texture.o
+./obj\image_DXT.o
+./obj\image_helper.o
+./obj\SOIL.o
+./obj\stb_image_aug.o
 );
