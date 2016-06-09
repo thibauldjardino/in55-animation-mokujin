@@ -526,71 +526,7 @@ GLuint
 GlFramework::createTexture( const char* name )
 {
 	GLuint texId = 0;
-    GLuint texId2 = 1;
-    GLuint texId3 = 2;
 
-    if(!load_Image){
-        glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
-         m_Image_wood.load( "../release/texture/wood-textures.jpg" );
-         m_Image_wood = QGLWidget::convertToGLFormat( m_Image_wood );
-
-         m_Image_metal.load( "../release/texture/metal-textures.jpg" );
-         m_Image_metal= QGLWidget::convertToGLFormat( m_Image_metal );
-
-         m_Image_rubis.load("../release/texture/yeux-textures.jpg");
-         m_Image_rubis = QGLWidget::convertToGLFormat( m_Image_metal );
-
-
-         load_Image = true;
-    }
-
- if (!strcmp( name, "rubis" ))
-    {
-
-            glGenTextures( 3, &texId2 );
-
-//			glEnable( GL_TEXTURE_2D );
-            glBindTexture( GL_TEXTURE_2D, texId2 );
-            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_Image_rubis.width(), m_Image_rubis.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image_rubis.bits() );
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-
-    }else if (!strcmp( name, "wood" ))
-    {
-
-
-
-
-            glGenTextures( 2, &texId3 );
-
-//			glEnable( GL_TEXTURE_2D );
-            glBindTexture( GL_TEXTURE_2D, texId3 );
-            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_Image_wood.width(), m_Image_wood.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image_wood.bits() );
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-
-    } else   if(!strcmp( name, "metal" )){
-
-
-
-        glGenTextures( 1, &texId );
-
-//			glEnable( GL_TEXTURE_2D );
-        glBindTexture( GL_TEXTURE_2D, texId );
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_Image_metal.width(), m_Image_metal.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_Image_metal.bits() );
-
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        }
 
 
     return texId;

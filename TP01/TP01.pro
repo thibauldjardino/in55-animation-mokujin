@@ -37,7 +37,8 @@ HEADERS += \
     ../Common/Mokujin.h \
     ../Common/ModelLoader.h \
     ../Common/Materialnfo.h \
-    ../Common/sdlglutils.h
+    ../Common/sdlglutils.h \
+    ../Common/texture.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -56,4 +57,5 @@ SOURCES += \
     ../Common/Quaternion.cpp \
     ../Common/Camera.cpp \
     ../Common/Mokujin.cpp \
-    ../Common/ModelLoader.cpp
+    ../Common/ModelLoader.cpp \
+    ../Common/texture.cpp

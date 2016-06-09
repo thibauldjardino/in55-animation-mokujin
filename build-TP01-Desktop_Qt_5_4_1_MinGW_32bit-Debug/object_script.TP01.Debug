@@ -16,4 +16,5 @@ INPUT(
 ./obj\Camera.o
 ./obj\Mokujin.o
 ./obj\ModelLoader.o
+./obj\texture.o
 );

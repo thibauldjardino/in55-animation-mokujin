@@ -5,6 +5,7 @@
 #include "ModelLoader.h"
 #include <iostream>
 #include <qthread.h>
+#include <texture.h>
 #include "GlWindow.h"
 #include "TP01.h"
 
@@ -48,6 +49,10 @@ protected:
     QVector<unsigned int> *indices;
     QSharedPointer<Node> m_rootNode;
     TP01 *window;
+
+    Texture *wood;
+    Texture *metal;
+    Texture *eye;
 
 
 
