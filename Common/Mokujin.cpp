@@ -268,6 +268,7 @@ void Mokujin::drawMesh( const Mesh *mesh) {
     }
 
     tmp.clear();
+
 }
 
 
@@ -312,19 +313,61 @@ void Mokujin::animation1(const Node &node) {
         this->m_Framework->rotate(-200,0,1,0);
         if(this->currentTime>=0 && this->currentTime<0.5) {
 
-             this->m_Framework->rotate(120,0,1,0);
+            this->m_Framework->rotate(120,0,1,0);
             this->m_Framework->rotate(-240*this->currentTime,0,1,0);
-           // this->m_Framework->rotate(240*this->currentTime,0,1,0);
-           // this->m_Framework->translate(0,-this->currentTime*5,this->currentTime*7);
+            // this->m_Framework->rotate(240*this->currentTime,0,1,0);
+            // this->m_Framework->translate(0,-this->currentTime*5,this->currentTime*7);
         } else {
 
-           this->m_Framework->rotate(240*(this->currentTime-0.5),0,1,0);
+            this->m_Framework->rotate(240*(this->currentTime-0.5),0,1,0);
 
-           /* this->m_Framework->rotate(120,1,1,1);
+            /* this->m_Framework->rotate(120,1,1,1);
             this->m_Framework->translate(0,-2.5,3.5);
             this->m_Framework->translate(0,(this->currentTime-0.5)*5,-(this->currentTime-0.5)*7);
             this->m_Framework->rotate(-240*(this->currentTime-0.5),1,-1,1);*/
         }
+    }
+    //Jambe droite
+    else if(node.name.toStdString()=="Bone.002") {
+        if(this->currentTime>=0 && this->currentTime<0.5) {
+            this->m_Framework->rotate(-40,0,1,0);
+            this->m_Framework->rotate(100*this->currentTime,0,1,0);
+        } else {
+            this->m_Framework->rotate(10,0,1,0);
+            this->m_Framework->rotate(-100*(this->currentTime-0.5),0,1,0);
+        }
+
+    }
+    //Jambe gauche
+    else if(node.name.toStdString()=="Bone.003") {
+
+        if(this->currentTime>=0 && this->currentTime<0.5) {
+            this->m_Framework->rotate(-10,0,1,0);
+            this->m_Framework->rotate(100*this->currentTime,0,1,0);
+        } else {
+            this->m_Framework->rotate(40,0,1,0);
+            this->m_Framework->rotate(-100*(this->currentTime-0.5),0,1,0);
+        }
+    }
+    //Tibia gauche
+    else if(node.name.toStdString()=="Bone.014") {
+         if(this->currentTime>=0 && this->currentTime<0.5) {
+             this->m_Framework->rotate(40,1,0,0);
+             this->m_Framework->rotate(-60*this->currentTime,1,0,0);
+         } else {
+             this->m_Framework->rotate(10,1,0,0);
+             this->m_Framework->rotate(60*(this->currentTime-0.5),1,0,0);
+         }
+    }
+    //Tibia droite
+    else if(node.name.toStdString()=="Bone.011") {
+         if(this->currentTime>=0 && this->currentTime<0.5) {
+             this->m_Framework->rotate(10,1,0,0);
+             this->m_Framework->rotate(60*this->currentTime,1,0,0);
+         } else {
+             this->m_Framework->rotate(40,1,0,0);
+             this->m_Framework->rotate(-60*(this->currentTime-0.5),1,0,0);
+         }
     }
 
 }
