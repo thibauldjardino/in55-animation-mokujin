@@ -42,7 +42,7 @@ TP01::TP01()
     pyr = new Pyramid( 5, 2.0, 10.0 );
     cyl = new Cylinder( 32, 1.5, 0.0, 10.0 );
     cube = new MultipleColorCube();
-    camera = new Camera(5,5,5);
+    camera = new Camera(10,10,10,0,3,0);
 
     mokujin = new Mokujin(this);
     mokujin->setFramework(this);
@@ -66,7 +66,7 @@ bool
 TP01::initializeObjects()
 {
     // Fond gris
-    glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
+    glClearColor( 0.3f, 0.1f, 0.7f, 1.0f );
     glEnable( GL_DEPTH_TEST );
 
     // Chargement des shaders
@@ -230,30 +230,40 @@ TP01::keyPressEvent( QKeyEvent* event )
         break;
 
     case Qt::Key_0:
+        mokujin->nbFrames = 60;
+        mokujin->timeStep = 1/(1.0f*mokujin->nbFrames);
         mokujin->currentAnimation="";
         mokujin->currentTime=-1;
         break;
 
     case Qt::Key_1:
         //Marche
+        mokujin->nbFrames = 60;
+        mokujin->timeStep = 1/(1.0f*mokujin->nbFrames);
         mokujin->currentAnimation="1";
         mokujin->currentTime=0;
         break;
 
     case Qt::Key_2:
         //Rotation du buste
+        mokujin->nbFrames = 60;
+        mokujin->timeStep = 1/(1.0f*mokujin->nbFrames);
         mokujin->currentAnimation="2";
         mokujin->currentTime=0;
         break;
 
         //Saut groupé
     case Qt::Key_3:
+        mokujin->nbFrames = 180;
+        mokujin->timeStep = 1/(1.0f*mokujin->nbFrames);
         mokujin->currentAnimation="3";
         mokujin->currentTime=0;
         break;
 
         //Grand écart plus mains en garde
     case Qt::Key_4:
+        mokujin->nbFrames = 60;
+        mokujin->timeStep = 1/(1.0f*mokujin->nbFrames);
         mokujin->currentAnimation="4";
         mokujin->currentTime=0;
         break;

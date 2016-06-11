@@ -11,7 +11,7 @@
 class Camera 
 {
     public:
-        Camera(float32 posX, float32 posY, float32 posZ);
+        Camera(float32 posX, float32 posY, float32 posZ, float32 lookX=0.0f, float32 lookY=0.0f, float32 lookZ=0.0f);
 
 		void translate (float32 x, float32 y, float32 z);
 		void translateX (float32 shift);

@@ -14,15 +14,15 @@
 /** Constructor.
  * Initializes the camera with position in parameter
  */
-Camera::Camera(float32 posX, float32 posY, float32 posZ) {
+Camera::Camera(float32 posX, float32 posY, float32 posZ, float32 lookX, float32 lookY, float32 lookZ ) {
 	
     this->m_position = new Vec3(posX,posY,posZ);
 
     if(posX*posY*posZ==0)
         this->m_forwardOrientation = new Quaternion(0,-15,-15,-15);
     else
-        this->m_forwardOrientation = new Quaternion(0,-posX,-posY,-posZ);
-    this->m_upOrientation = new Quaternion(0,-posY,posX,0);
+        this->m_forwardOrientation = new Quaternion(0,lookX-posX,lookY-posY,lookZ-posZ);
+    this->m_upOrientation = new Quaternion(0,lookY-posY,posX-lookX,0);
 	this->m_ViewMatrix.setIdentity();
 	this->m_ProjectionMatrix.setIdentity();
 	this->aspectRatio = 1; //?

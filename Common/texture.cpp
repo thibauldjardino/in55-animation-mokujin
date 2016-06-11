@@ -68,7 +68,7 @@ void Texture::drawShape(GLsizei size, const GLvoid* tab_indices){
     }
 
 
-    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT,tab_indices);
+    glDrawElements(GL_LINES, size, GL_UNSIGNED_INT,tab_indices);
     Texture::close();
 }
 

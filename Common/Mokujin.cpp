@@ -154,6 +154,7 @@ void Mokujin::drawMesh( const Mesh *mesh) {
             wood->drawShape(588, mesh->m_indices.data());
 
 
+
             for(int i =588;i<mesh->m_indices.size();i++){
                 tmp.push_back(mesh->m_indices[i]);
             }
@@ -235,7 +236,7 @@ void Mokujin::drawMesh( const Mesh *mesh) {
                 }
 
                // glDrawElements( GL_TRIANGLES, tmp2.size(), GL_UNSIGNED_INT, tmp2.data() );
-                wood->drawShape( tmp2.size(), tmp2.data());
+                metal->drawShape( tmp2.size(), tmp2.data());
                 glDisableVertexAttribArray( 0 );
 
 
@@ -313,7 +314,11 @@ void Mokujin::animation1(const Node &node) {
 
     //Tout le corps
     if(node.name.toStdString()=="Armature") {
-        this->m_Framework->translate(0,12*this->currentTime,0);
+        if(this->currentTime>=0 && this->currentTime<0.5) {
+            this->m_Framework->translate(0,12*this->currentTime,this->currentTime);
+        } else {
+            this->m_Framework->translate(0,12*this->currentTime,0.5-(this->currentTime-0.5));
+        }
     }
     //Bras droit
     else if(node.name.toStdString()=="Bone.020") {
@@ -393,9 +398,7 @@ void Mokujin::animation1(const Node &node) {
 
 }
 
-
-
-
+//Rotation du buste
 void Mokujin::animation2(const Node &node) {
 
     if(node.name.toStdString()=="Armature") {
@@ -407,9 +410,256 @@ void Mokujin::animation2(const Node &node) {
 }
 
 
+//Saut groupé
 void Mokujin::animation3(const Node &node) {
-    //TODO
 
+     //Tout le corps
+    if(node.name.toStdString()=="Armature") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+             this->m_Framework->translate(0,0,18*this->currentTime);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+
+    }
+    //Bras droit
+    else if(node.name.toStdString()=="Bone.020") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+
+    }
+    //Bras gauche
+    else if(node.name.toStdString()=="Bone.017") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->translate(1*this->currentTime,1*6*this->currentTime,-3*6*this->currentTime);
+            this->m_Framework->rotate(300*this->currentTime,1,0,0);
+
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
+    //Jambe gauche
+    else if(node.name.toStdString()=="Bone.003") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->rotate(300*this->currentTime,0,1,0);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
+    //Jambe droite
+    else if(node.name.toStdString()=="Bone.002") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->rotate(-300*this->currentTime,0,1,0);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
+    //Tibia gauche
+    else if(node.name.toStdString()=="Bone.014") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->rotate(600*this->currentTime,1,0,0);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
+    //Tibia droite
+    else if(node.name.toStdString()=="Bone.011") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->rotate(600*this->currentTime,1,0,0);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
+    //Pied droit
+    else if(node.name.toStdString()=="Bone.012") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->rotate(-300*this->currentTime,1,0,0);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
+    //Pied gauche
+    else if(node.name.toStdString()=="Bone.015") {
+        //Phase de flexion
+        if(this->currentTime>=0 && this->currentTime<0.166) {
+            this->m_Framework->rotate(-300*this->currentTime,1,0,0);
+        }
+        //Phase d'extension
+        else if (this->currentTime>=0.166 && this->currentTime<0.322) {
+
+        }
+        //Phase de saut
+        else if (this->currentTime>=0.322 && this->currentTime<0.498) {
+
+        }
+        //Phase de retombée
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+
+        }
+        //Phase d'amortissement
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+
+        }
+        //Phase de retour à la postion debout
+        else {
+
+        }
+    }
 }
 
 
