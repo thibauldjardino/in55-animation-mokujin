@@ -67,7 +67,6 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
 void Mokujin::drawNode(const Node &node)
 {
 
-    this->m_Framework->createTexture("");
 
     // cout << "-------- DEBUGG NODE ---------" << endl;
 
@@ -141,15 +140,13 @@ void Mokujin::drawShape( const char* shader_name )
 void Mokujin::drawMesh( const Mesh *mesh) {
 
     QVector<unsigned int> tmp;
+    //dessine les avants bras et les cuisses avec textures : metal pour les spheres et bois pour les cylindres
     if(!strcmp(mesh->name.toStdString().c_str(), "Cylinder.025") || !strcmp(mesh->name.toStdString().c_str(), "Cylinder.028")
             ||!strcmp(mesh->name.toStdString().c_str(), "Sphere.006") || !strcmp(mesh->name.toStdString().c_str(), "Sphere.007")){
-
-        //this->m_Framework->createTexture("wood");
 
         glEnableVertexAttribArray( 0 );
 
         glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-        //glDrawElements( GL_TRIANGLES, 588, GL_UNSIGNED_INT, mesh->m_indices.data() );
 
         wood->drawShape(588, mesh->m_indices.data());
 
@@ -160,106 +157,88 @@ void Mokujin::drawMesh( const Mesh *mesh) {
         }
 
 
-        //this->m_Framework->createTexture("metal");
-
-
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         metal->drawShape(tmp.size(), tmp.data());
 
         glDisableVertexAttribArray( 0 );
 
-
+    //dessine les tibias et les mains avec textures : metal pour les spheres et bois pour les cylindres
     }else if(!strcmp(mesh->name.toStdString().c_str(), "Sphere.023")|| !strcmp(mesh->name.toStdString().c_str(), "Sphere.022")
              ||!strcmp(mesh->name.toStdString().c_str(), "Sphere.002") || !strcmp(mesh->name.toStdString().c_str(), "Sphere.003")
              ){
 
-        //this->m_Framework->createTexture("metal");
 
         glEnableVertexAttribArray( 0 );
 
         glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-        //glDrawElements( GL_TRIANGLES, 14702, GL_UNSIGNED_INT, mesh->m_indices.data() );
         metal->drawShape(14702,  mesh->m_indices.data());
 
         for(int i =14701;i<mesh->m_indices.size();i++){
             tmp.push_back(mesh->m_indices[i]);
         }
 
-        //this->m_Framework->createTexture("wood");
 
 
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         wood->drawShape(tmp.size(), tmp.data());
         glDisableVertexAttribArray( 0 );
 
 
     }
+     //dessine les pieds avec textures : bois pour les demi-cylindres
     else if(!strcmp(mesh->name.toStdString().c_str(), "Cylinder.006")||!strcmp(mesh->name.toStdString().c_str(), "Cylinder.005") ){
 
-        this->m_Framework->createTexture("wood");
 
         glEnableVertexAttribArray( 0 );
 
         glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-        //glDrawElements( GL_TRIANGLES,  mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
         wood->drawShape( mesh->m_indices.size(), mesh->m_indices.data());
         glDisableVertexAttribArray( 0 );
 
 
     }
+     //dessine le buste : metal pour les spheres et bois pour les cylindres
     else if(!strcmp(mesh->name.toStdString().c_str(), "Sphere.013")){
 
         QVector<unsigned int> tmp2;
         int corps;
 
-        //this->m_Framework->createTexture("metal");
 
         glEnableVertexAttribArray( 0 );
 
         glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-        //glDrawElements( GL_TRIANGLES,  4*14700, GL_UNSIGNED_INT, mesh->m_indices.data() );
         metal->drawShape( 4*14700, mesh->m_indices.data());
 
-        //this->m_Framework->createTexture("wood");
         corps = 4*14700;
         for(int i =corps;i<(corps + 588);i++){
             tmp.push_back(mesh->m_indices[i]);
         }
 
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         wood->drawShape( tmp.size(), tmp.data());
 
-        // this->m_Framework->createTexture("metal");
 
         for(int i =corps + 588;i<mesh->m_indices.size();i++){
             tmp2.push_back(mesh->m_indices[i]);
         }
 
-        // glDrawElements( GL_TRIANGLES, tmp2.size(), GL_UNSIGNED_INT, tmp2.data() );
         metal->drawShape( tmp2.size(), tmp2.data());
         glDisableVertexAttribArray( 0 );
 
 
         tmp2.clear();
     }
+     //dessine la tete avec texture : metal pour le cone et la bouche, bois pour le visage, vert pour les yeux et rouge pour le nez
     else if(!strcmp(mesh->name.toStdString().c_str(), "Cone.005")){
 
-
-        //this->m_Framework->createTexture("metal");
 
         glEnableVertexAttribArray( 0 );
 
         glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-        //glDrawElements( GL_TRIANGLES,  38, GL_UNSIGNED_INT, mesh->m_indices.data() );
         metal->drawShape( 38, mesh->m_indices.data());
-        //this->m_Framework->createTexture("metal");
 
         for(int i =39;i<332;i++){
             tmp.push_back(mesh->m_indices[i]);
         }
 
 
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         metal->drawShape( tmp.size(), tmp.data());
 
         tmp.clear();
@@ -267,20 +246,16 @@ void Mokujin::drawMesh( const Mesh *mesh) {
             tmp.push_back(mesh->m_indices[i]);
         }
 
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         nose->drawShape( tmp.size(), tmp.data());
         tmp.clear();
         for(int i =905;i<30307;i++){
             tmp.push_back(mesh->m_indices[i]);
         }
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         eye->drawShape( tmp.size(), tmp.data());
         tmp.clear();
         for(int i =30306;i<mesh->m_indices.size();i++){
             tmp.push_back(mesh->m_indices[i]);
         }
-        //this->m_Framework->createTexture("wood");
-        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
         wood->drawShape( tmp.size(), tmp.data());
 
         glDisableVertexAttribArray( 0 );

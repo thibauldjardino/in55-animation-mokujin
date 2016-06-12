@@ -7,12 +7,12 @@ Texture::Texture()
 
 void Texture::load(const char* name ){
 
-    if(m_image.load(name)){
+    if(!m_image.load(name)){
 
        cout<<"fail to load texture"<<endl;
 
-       m_image = QGLWidget::convertToGLFormat( m_image );
-
+    }else{
+        m_image = QGLWidget::convertToGLFormat( m_image );
     }
 
 }
