@@ -4,7 +4,7 @@ Texture::Texture()
 {
     soil_Load = false;
 }
-
+// charge la texture
 void Texture::load(const char* name ){
 
     if(!m_image.load(name)){
@@ -16,7 +16,7 @@ void Texture::load(const char* name ){
     }
 
 }
-
+// charge une image en utilisant soil
 void Texture::loadSOIL(const char* name ){
 
     image = SOIL_load_image(name,
@@ -28,6 +28,7 @@ void Texture::loadSOIL(const char* name ){
 
 }
 
+//instancier la texture dans OpenGL
 void Texture::init(){
 
 
@@ -40,6 +41,7 @@ void Texture::init(){
 
 }
 
+//instancier l'image dans OpenGL
 void Texture::initSOIL(){
 
 
@@ -58,7 +60,7 @@ void Texture::initSOIL(){
                                                GL_UNSIGNED_BYTE,
                                                image);
 }
-
+//construit la texture ou l'image sur les triangles d'un objet passé en paramètre
 void Texture::drawShape(GLsizei size, const GLvoid* tab_indices){
     if(soil_Load){
         Texture::initSOIL();
