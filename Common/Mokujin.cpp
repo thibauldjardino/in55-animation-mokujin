@@ -38,17 +38,17 @@ Mokujin::Mokujin(TP01 *win):Object3D{}
     //cout << "Name mesh : " << tabMeshes[3].data()->name.toStdString() << endl;
 
     wood = new Texture();
-       wood->loadSOIL("../release/texture/ecorse-textures.jpg");
+    wood->loadSOIL("../release/texture/ecorse-textures.jpg");
 
-       metal = new Texture();
-       metal->load("../release/texture/metal-textures.jpg");
+    metal = new Texture();
+    metal->load("../release/texture/metal-textures.jpg");
 
-       eye = new Texture();
-       eye->load("../release/texture/yeux-textures.jpg");
+    eye = new Texture();
+    eye->load("../release/texture/yeux-textures.jpg");
 
 
-       nose = new Texture();
-       nose->load("../release/texture/nez-textures.jpg");
+    nose = new Texture();
+    nose->load("../release/texture/nez-textures.jpg");
 
 
     Node& rootNode = *(this->m_loader.m_rootNode.data());
@@ -141,155 +141,155 @@ void Mokujin::drawShape( const char* shader_name )
 void Mokujin::drawMesh( const Mesh *mesh) {
 
     QVector<unsigned int> tmp;
-        if(!strcmp(mesh->name.toStdString().c_str(), "Cylinder.025") || !strcmp(mesh->name.toStdString().c_str(), "Cylinder.028")
+    if(!strcmp(mesh->name.toStdString().c_str(), "Cylinder.025") || !strcmp(mesh->name.toStdString().c_str(), "Cylinder.028")
             ||!strcmp(mesh->name.toStdString().c_str(), "Sphere.006") || !strcmp(mesh->name.toStdString().c_str(), "Sphere.007")){
 
-            //this->m_Framework->createTexture("wood");
+        //this->m_Framework->createTexture("wood");
 
-            glEnableVertexAttribArray( 0 );
+        glEnableVertexAttribArray( 0 );
 
-            glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-            //glDrawElements( GL_TRIANGLES, 588, GL_UNSIGNED_INT, mesh->m_indices.data() );
+        glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
+        //glDrawElements( GL_TRIANGLES, 588, GL_UNSIGNED_INT, mesh->m_indices.data() );
 
-            wood->drawShape(588, mesh->m_indices.data());
-
-
-
-            for(int i =588;i<mesh->m_indices.size();i++){
-                tmp.push_back(mesh->m_indices[i]);
-            }
+        wood->drawShape(588, mesh->m_indices.data());
 
 
-            //this->m_Framework->createTexture("metal");
 
-
-            //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-            metal->drawShape(tmp.size(), tmp.data());
-
-            glDisableVertexAttribArray( 0 );
-
-
-        }else if(!strcmp(mesh->name.toStdString().c_str(), "Sphere.023")|| !strcmp(mesh->name.toStdString().c_str(), "Sphere.022")
-                 ||!strcmp(mesh->name.toStdString().c_str(), "Sphere.002") || !strcmp(mesh->name.toStdString().c_str(), "Sphere.003")
-                 ){
-
-            //this->m_Framework->createTexture("metal");
-
-            glEnableVertexAttribArray( 0 );
-
-            glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-            //glDrawElements( GL_TRIANGLES, 14702, GL_UNSIGNED_INT, mesh->m_indices.data() );
-            metal->drawShape(14702,  mesh->m_indices.data());
-
-            for(int i =14701;i<mesh->m_indices.size();i++){
-                tmp.push_back(mesh->m_indices[i]);
-            }
-
-            //this->m_Framework->createTexture("wood");
-
-
-            //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-             wood->drawShape(tmp.size(), tmp.data());
-            glDisableVertexAttribArray( 0 );
-
-
+        for(int i =588;i<mesh->m_indices.size();i++){
+            tmp.push_back(mesh->m_indices[i]);
         }
-        else if(!strcmp(mesh->name.toStdString().c_str(), "Cylinder.006")||!strcmp(mesh->name.toStdString().c_str(), "Cylinder.005") ){
-
-                this->m_Framework->createTexture("wood");
-
-                glEnableVertexAttribArray( 0 );
-
-                glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-                //glDrawElements( GL_TRIANGLES,  mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
-                wood->drawShape( mesh->m_indices.size(), mesh->m_indices.data());
-                glDisableVertexAttribArray( 0 );
 
 
-            }
-        else if(!strcmp(mesh->name.toStdString().c_str(), "Sphere.013")){
-
-                QVector<unsigned int> tmp2;
-                int corps;
-
-                //this->m_Framework->createTexture("metal");
-
-                glEnableVertexAttribArray( 0 );
-
-                glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-                //glDrawElements( GL_TRIANGLES,  4*14700, GL_UNSIGNED_INT, mesh->m_indices.data() );
-                metal->drawShape( 4*14700, mesh->m_indices.data());
-
-                //this->m_Framework->createTexture("wood");
-                corps = 4*14700;
-                for(int i =corps;i<(corps + 588);i++){
-                    tmp.push_back(mesh->m_indices[i]);
-                }
-
-                //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-                wood->drawShape( tmp.size(), tmp.data());
-
-               // this->m_Framework->createTexture("metal");
-
-              for(int i =corps + 588;i<mesh->m_indices.size();i++){
-                    tmp2.push_back(mesh->m_indices[i]);
-                }
-
-               // glDrawElements( GL_TRIANGLES, tmp2.size(), GL_UNSIGNED_INT, tmp2.data() );
-                metal->drawShape( tmp2.size(), tmp2.data());
-                glDisableVertexAttribArray( 0 );
+        //this->m_Framework->createTexture("metal");
 
 
-                tmp2.clear();
-            }
-        else if(!strcmp(mesh->name.toStdString().c_str(), "Cone.005")){
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        metal->drawShape(tmp.size(), tmp.data());
+
+        glDisableVertexAttribArray( 0 );
 
 
-            //this->m_Framework->createTexture("metal");
+    }else if(!strcmp(mesh->name.toStdString().c_str(), "Sphere.023")|| !strcmp(mesh->name.toStdString().c_str(), "Sphere.022")
+             ||!strcmp(mesh->name.toStdString().c_str(), "Sphere.002") || !strcmp(mesh->name.toStdString().c_str(), "Sphere.003")
+             ){
 
-            glEnableVertexAttribArray( 0 );
+        //this->m_Framework->createTexture("metal");
 
-            glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
-            //glDrawElements( GL_TRIANGLES,  38, GL_UNSIGNED_INT, mesh->m_indices.data() );
-            metal->drawShape( 38, mesh->m_indices.data());
-            //this->m_Framework->createTexture("metal");
+        glEnableVertexAttribArray( 0 );
 
-            for(int i =39;i<332;i++){
-                tmp.push_back(mesh->m_indices[i]);
-            }
+        glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
+        //glDrawElements( GL_TRIANGLES, 14702, GL_UNSIGNED_INT, mesh->m_indices.data() );
+        metal->drawShape(14702,  mesh->m_indices.data());
 
-
-           //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-           metal->drawShape( tmp.size(), tmp.data());
-
-           tmp.clear();
-           for(int i =331;i<906;i++){
-               tmp.push_back(mesh->m_indices[i]);
-           }
-
-          //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-          nose->drawShape( tmp.size(), tmp.data());
-          tmp.clear();
-          for(int i =905;i<30307;i++){
-              tmp.push_back(mesh->m_indices[i]);
-          }
-          //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-          eye->drawShape( tmp.size(), tmp.data());
-          tmp.clear();
-          for(int i =30306;i<mesh->m_indices.size();i++){
-              tmp.push_back(mesh->m_indices[i]);
-          }
-           //this->m_Framework->createTexture("wood");
-           //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
-           wood->drawShape( tmp.size(), tmp.data());
-
-            glDisableVertexAttribArray( 0 );
-
-
-
+        for(int i =14701;i<mesh->m_indices.size();i++){
+            tmp.push_back(mesh->m_indices[i]);
         }
+
+        //this->m_Framework->createTexture("wood");
+
+
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        wood->drawShape(tmp.size(), tmp.data());
+        glDisableVertexAttribArray( 0 );
+
+
+    }
+    else if(!strcmp(mesh->name.toStdString().c_str(), "Cylinder.006")||!strcmp(mesh->name.toStdString().c_str(), "Cylinder.005") ){
+
+        this->m_Framework->createTexture("wood");
+
+        glEnableVertexAttribArray( 0 );
+
+        glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
+        //glDrawElements( GL_TRIANGLES,  mesh->m_indices.size(), GL_UNSIGNED_INT, mesh->m_indices.data() );
+        wood->drawShape( mesh->m_indices.size(), mesh->m_indices.data());
+        glDisableVertexAttribArray( 0 );
+
+
+    }
+    else if(!strcmp(mesh->name.toStdString().c_str(), "Sphere.013")){
+
+        QVector<unsigned int> tmp2;
+        int corps;
+
+        //this->m_Framework->createTexture("metal");
+
+        glEnableVertexAttribArray( 0 );
+
+        glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
+        //glDrawElements( GL_TRIANGLES,  4*14700, GL_UNSIGNED_INT, mesh->m_indices.data() );
+        metal->drawShape( 4*14700, mesh->m_indices.data());
+
+        //this->m_Framework->createTexture("wood");
+        corps = 4*14700;
+        for(int i =corps;i<(corps + 588);i++){
+            tmp.push_back(mesh->m_indices[i]);
+        }
+
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        wood->drawShape( tmp.size(), tmp.data());
+
+        // this->m_Framework->createTexture("metal");
+
+        for(int i =corps + 588;i<mesh->m_indices.size();i++){
+            tmp2.push_back(mesh->m_indices[i]);
+        }
+
+        // glDrawElements( GL_TRIANGLES, tmp2.size(), GL_UNSIGNED_INT, tmp2.data() );
+        metal->drawShape( tmp2.size(), tmp2.data());
+        glDisableVertexAttribArray( 0 );
+
+
+        tmp2.clear();
+    }
+    else if(!strcmp(mesh->name.toStdString().c_str(), "Cone.005")){
+
+
+        //this->m_Framework->createTexture("metal");
+
+        glEnableVertexAttribArray( 0 );
+
+        glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, mesh->m_vertices.data() );
+        //glDrawElements( GL_TRIANGLES,  38, GL_UNSIGNED_INT, mesh->m_indices.data() );
+        metal->drawShape( 38, mesh->m_indices.data());
+        //this->m_Framework->createTexture("metal");
+
+        for(int i =39;i<332;i++){
+            tmp.push_back(mesh->m_indices[i]);
+        }
+
+
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        metal->drawShape( tmp.size(), tmp.data());
 
         tmp.clear();
+        for(int i =331;i<906;i++){
+            tmp.push_back(mesh->m_indices[i]);
+        }
+
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        nose->drawShape( tmp.size(), tmp.data());
+        tmp.clear();
+        for(int i =905;i<30307;i++){
+            tmp.push_back(mesh->m_indices[i]);
+        }
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        eye->drawShape( tmp.size(), tmp.data());
+        tmp.clear();
+        for(int i =30306;i<mesh->m_indices.size();i++){
+            tmp.push_back(mesh->m_indices[i]);
+        }
+        //this->m_Framework->createTexture("wood");
+        //glDrawElements( GL_TRIANGLES, tmp.size(), GL_UNSIGNED_INT, tmp.data() );
+        wood->drawShape( tmp.size(), tmp.data());
+
+        glDisableVertexAttribArray( 0 );
+
+
+
+    }
+
+    tmp.clear();
 
 }
 
@@ -377,23 +377,23 @@ void Mokujin::animation1(const Node &node) {
     }
     //Tibia gauche
     else if(node.name.toStdString()=="Bone.014") {
-         if(this->currentTime>=0 && this->currentTime<0.5) {
-             this->m_Framework->rotate(40,1,0,0);
-             this->m_Framework->rotate(-60*this->currentTime,1,0,0);
-         } else {
-             this->m_Framework->rotate(10,1,0,0);
-             this->m_Framework->rotate(60*(this->currentTime-0.5),1,0,0);
-         }
+        if(this->currentTime>=0 && this->currentTime<0.5) {
+            this->m_Framework->rotate(40,1,0,0);
+            this->m_Framework->rotate(-60*this->currentTime,1,0,0);
+        } else {
+            this->m_Framework->rotate(10,1,0,0);
+            this->m_Framework->rotate(60*(this->currentTime-0.5),1,0,0);
+        }
     }
     //Tibia droite
     else if(node.name.toStdString()=="Bone.011") {
-         if(this->currentTime>=0 && this->currentTime<0.5) {
-             this->m_Framework->rotate(10,1,0,0);
-             this->m_Framework->rotate(60*this->currentTime,1,0,0);
-         } else {
-             this->m_Framework->rotate(40,1,0,0);
-             this->m_Framework->rotate(-60*(this->currentTime-0.5),1,0,0);
-         }
+        if(this->currentTime>=0 && this->currentTime<0.5) {
+            this->m_Framework->rotate(10,1,0,0);
+            this->m_Framework->rotate(60*this->currentTime,1,0,0);
+        } else {
+            this->m_Framework->rotate(40,1,0,0);
+            this->m_Framework->rotate(-60*(this->currentTime-0.5),1,0,0);
+        }
     }
 
 }
@@ -413,31 +413,32 @@ void Mokujin::animation2(const Node &node) {
 //Saut groupé
 void Mokujin::animation3(const Node &node) {
 
-     //Tout le corps
+    //Tout le corps
     if(node.name.toStdString()=="Armature") {
         //Phase de flexion
         if(this->currentTime>=0 && this->currentTime<0.166) {
-             this->m_Framework->translate(0,0,18*this->currentTime);
+            this->m_Framework->translate(0,0,18*this->currentTime);
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->translate(0,0,18*0.166-18*(this->currentTime-0.166));
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
-
+            this->m_Framework->translate(0,0,-20*(this->currentTime-0.322));
+        }
+        //Phase de point culminant
+        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
+            this->m_Framework->translate(0,0,-20*0.166);
+            this->m_Framework->translate(0,0,-(-240.964*this->currentTime*this->currentTime+280*this->currentTime-79.68));
         }
         //Phase de retombée
-        else if (this->currentTime>=0.498 && this->currentTime<0.664) {
-
+        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
+            this->m_Framework->translate(0,0,-20*0.166+20*(this->currentTime-0.664));
         }
         //Phase d'amortissement
-        else if (this->currentTime>=0.664 && this->currentTime<0.83) {
-
-        }
-        //Phase de retour à la postion debout
         else {
-
+            this->m_Framework->translate(0,0,10*(this->currentTime-0.83));
         }
 
     }
@@ -445,27 +446,30 @@ void Mokujin::animation3(const Node &node) {
     else if(node.name.toStdString()=="Bone.020") {
         //Phase de flexion
         if(this->currentTime>=0 && this->currentTime<0.166) {
-
+            this->m_Framework->translate(0,0.7*6*this->currentTime,-3*6*this->currentTime);
+            this->m_Framework->rotate(310*this->currentTime,1,0,0);
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->translate(0,0.7-0.7*6*(this->currentTime-0.166),-3+3*6*(this->currentTime-0.166));
+            this->m_Framework->rotate(310*0.166-310*(this->currentTime-0.166),1,0,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->translate(0,0.7*6*(this->currentTime-0.83),-3*6*(this->currentTime-0.83));
+            this->m_Framework->rotate(310*(this->currentTime-0.83),1,0,0);
         }
 
     }
@@ -473,29 +477,30 @@ void Mokujin::animation3(const Node &node) {
     else if(node.name.toStdString()=="Bone.017") {
         //Phase de flexion
         if(this->currentTime>=0 && this->currentTime<0.166) {
-            this->m_Framework->translate(1*this->currentTime,1*6*this->currentTime,-3*6*this->currentTime);
-            this->m_Framework->rotate(300*this->currentTime,1,0,0);
-
+            this->m_Framework->translate(0,1*6*this->currentTime,-3*6*this->currentTime);
+            this->m_Framework->rotate(310*this->currentTime,1,0,0);
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->translate(0,1-1*6*(this->currentTime-0.166),-3+3*6*(this->currentTime-0.166));
+            this->m_Framework->rotate(310*0.166-310*(this->currentTime-0.166),1,0,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->translate(0,1*6*(this->currentTime-0.83),-3*6*(this->currentTime-0.83));
+            this->m_Framework->rotate(310*(this->currentTime-0.83),1,0,0);
         }
     }
     //Jambe gauche
@@ -506,23 +511,23 @@ void Mokujin::animation3(const Node &node) {
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->rotate(300*0.166-300*(this->currentTime-0.166),0,1,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->rotate(166.66*(this->currentTime-0.83),0,1,0);
         }
     }
     //Jambe droite
@@ -533,23 +538,23 @@ void Mokujin::animation3(const Node &node) {
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->rotate(-300*0.166+300*(this->currentTime-0.166),0,1,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->rotate(-166.66*(this->currentTime-0.83),0,1,0);
         }
     }
     //Tibia gauche
@@ -560,23 +565,23 @@ void Mokujin::animation3(const Node &node) {
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->rotate(600*0.166-600*(this->currentTime-0.166),1,0,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->rotate(333.33*(this->currentTime-0.83),1,0,0);
         }
     }
     //Tibia droite
@@ -587,23 +592,23 @@ void Mokujin::animation3(const Node &node) {
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->rotate(600*0.166-600*(this->currentTime-0.166),1,0,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->rotate(333.33*(this->currentTime-0.83),1,0,0);
         }
     }
     //Pied droit
@@ -614,23 +619,23 @@ void Mokujin::animation3(const Node &node) {
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->rotate(-300*0.166+300*(this->currentTime-0.166),1,0,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->rotate(-166.66*(this->currentTime-0.83),1,0,0);
         }
     }
     //Pied gauche
@@ -641,23 +646,23 @@ void Mokujin::animation3(const Node &node) {
         }
         //Phase d'extension
         else if (this->currentTime>=0.166 && this->currentTime<0.322) {
-
+            this->m_Framework->rotate(-300*0.166+300*(this->currentTime-0.166),1,0,0);
         }
         //Phase de saut
         else if (this->currentTime>=0.322 && this->currentTime<0.498) {
 
         }
-        //Phase de retombée
+        //Phase de point culminant
         else if (this->currentTime>=0.498 && this->currentTime<0.664) {
 
         }
-        //Phase d'amortissement
+        //Phase de retombée
         else if (this->currentTime>=0.664 && this->currentTime<0.83) {
 
         }
-        //Phase de retour à la postion debout
+        //Phase d'amortissement
         else {
-
+            this->m_Framework->rotate(-166.66*(this->currentTime-0.83),1,0,0);
         }
     }
 }

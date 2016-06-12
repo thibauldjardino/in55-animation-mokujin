@@ -66,7 +66,7 @@ bool
 TP01::initializeObjects()
 {
     // Fond gris
-    glClearColor( 0.3f, 0.1f, 0.7f, 1.0f );
+    glClearColor( 0.3f, 0.3f, 0.6f, 1.0f );
     glEnable( GL_DEPTH_TEST );
 
     // Chargement des shaders
@@ -254,7 +254,7 @@ TP01::keyPressEvent( QKeyEvent* event )
 
         //Saut groupé
     case Qt::Key_3:
-        mokujin->nbFrames = 180;
+        mokujin->nbFrames = 120;
         mokujin->timeStep = 1/(1.0f*mokujin->nbFrames);
         mokujin->currentAnimation="3";
         mokujin->currentTime=0;
