@@ -28,8 +28,6 @@ struct LightInfo
 struct Mesh
 {
     QString name;
-    unsigned int indexCount;
-    unsigned int indexOffset;
     QVector<float> m_vertices;
     QVector<unsigned int> m_indices;
     QSharedPointer<MaterialInfo> material;

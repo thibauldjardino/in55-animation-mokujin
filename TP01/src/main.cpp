@@ -10,16 +10,15 @@
 //*****************************************************************************
 
 
-#include "TP01.h"
+#include "MainWindow.h"
 
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);
-	TP01 win;
-  //  win.setGeometry(200,200,200,200);
-	win.show();
-	return app.exec();
+    QApplication app(argc, argv);
+    MainWindow win;
+    win.show();
+    return app.exec();
 }

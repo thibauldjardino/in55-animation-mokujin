@@ -5,14 +5,14 @@
 #include "ModelLoader.h"
 #include <iostream>
 #include <qthread.h>
-#include <texture.h>
+#include <Texture.h>
 #include "GlWindow.h"
-#include "TP01.h"
+#include "MainWindow.h"
 
 class Mokujin : public Object3D
 {
 public:
-    Mokujin(TP01 *win);
+    Mokujin();
     std::string currentAnimation;
     float currentTime;
     float timeStep;
@@ -48,14 +48,11 @@ protected:
     QVector<float> *normals;
     QVector<unsigned int> *indices;
     QSharedPointer<Node> m_rootNode;
-    TP01 *window;
 
     Texture *wood;
     Texture *metal;
     Texture *eye;
     Texture *nose;
-
-
 
 };
 

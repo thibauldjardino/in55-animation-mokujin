@@ -380,8 +380,6 @@ GlFramework::setOrtho(GLfloat fovY, GLfloat ratio, GLfloat zNear, GLfloat zFar)
 void
 GlFramework::applyMatrix( QMatrix4x4 transformation ) {
 
-    //cout << "-------- DEBUGG APPLY ---------" << endl;
-
     GLMatrix r;
     for (int i=0; i<4; i++) {
         for (int j=0; j<4; j++) {

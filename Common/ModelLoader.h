@@ -12,8 +12,7 @@ class ModelLoader
 public:
     ModelLoader();
     bool Load(QString pathToFile);
-    void getBufferData(QVector<float> **vertices, QVector<float> **normals,
-                       QVector<unsigned int> **indices);
+    void getBufferData(QVector<float> **vertices, QVector<float> **normals,QVector<unsigned int> **indices);
 
     QSharedPointer<Node> getNodeData() { return m_rootNode; }
 

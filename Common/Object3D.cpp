@@ -7,7 +7,7 @@ AbstractFramework* Object3D::m_Framework = NULL;
 void
 Object3D::setFramework( AbstractFramework* fw )
 {
-	m_Framework = fw;
+    m_Framework = fw;
 }
 
 

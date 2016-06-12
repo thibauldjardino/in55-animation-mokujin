@@ -26,25 +26,20 @@ HEADERS += \
     ../Common/Object3D.h \
     ../Common/Shapes/Basis.h \
     ../Common/Shapes/Shape.h \
-    ../Common/Shapes/ParametricShape.h \
-    ../Common/Shapes/Cubes.h \
-    ../Common/Shapes/Cylinder.h \
-    ../Common/Shapes/Pyramid.h \
-    ../Common/Shapes/Star.h \
     ../Common/Quaternion.h \
     ../Common/Camera.h \
-    src/TP01.h \
     ../Common/Mokujin.h \
     ../Common/ModelLoader.h \
     ../Common/Materialnfo.h \
     ../Common/sdlglutils.h \
-    ../Common/texture.h \
     ../Common/image_DXT.h \
     ../Common/image_helper.h \
     ../Common/SOIL.h \
     ../Common/stb_image_aug.h \
     ../Common/stbi_DDS_aug.h \
-    ../Common/stbi_DDS_aug_c.h
+    ../Common/stbi_DDS_aug_c.h \
+    src/MainWindow.h \
+    ../Common/Texture.h
 
 SOURCES += \
     ../Common/GlFramework.cpp \
@@ -53,19 +48,14 @@ SOURCES += \
     ../Common/Object3D.cpp \
     ../Common/Shapes/Basis.cpp \
     ../Common/Shapes/Shape.cpp \
-    ../Common/Shapes/ParametricShape.cpp \
-    ../Common/Shapes/Cubes.cpp \
-    ../Common/Shapes/Cylinder.cpp \
-    ../Common/Shapes/Pyramid.cpp \
-    ../Common/Shapes/Star.cpp \
-    src/TP01.cpp \
     src/main.cpp \
     ../Common/Quaternion.cpp \
     ../Common/Camera.cpp \
     ../Common/Mokujin.cpp \
     ../Common/ModelLoader.cpp \
-    ../Common/texture.cpp \
     ../Common/image_DXT.c \
     ../Common/image_helper.c \
     ../Common/SOIL.c \
-    ../Common/stb_image_aug.c
+    ../Common/stb_image_aug.c \
+    src/MainWindow.cpp \
+    ../Common/Texture.cpp

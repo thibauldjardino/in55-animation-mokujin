@@ -12,7 +12,6 @@ bool ModelLoader::Load(QString pathToFile)
     Assimp::Importer importer;
 
     const aiScene* scene = importer.ReadFile(pathToFile.toStdString(),
-                                             //aiProcess_CalcTangentSpace |
                                              aiProcess_LimitBoneWeights |
                                              aiProcess_Triangulate |
                                              aiProcess_JoinIdenticalVertices |
@@ -46,12 +45,6 @@ bool ModelLoader::Load(QString pathToFile)
         {
             m_meshes.append(processMesh(scene->mMeshes[ii]));
         }
-        for (unsigned int ii = 0; ii < scene->mNumMeshes; ++ii)
-        {
-
-            //qDebug()<<m_meshes[ii].data()->name;
-        }
-        //qDebug()<<m_vertices.length();
     }
     else
     {
@@ -90,8 +83,6 @@ QSharedPointer<Mesh> ModelLoader::processMesh(aiMesh *mesh)
 {
     QSharedPointer<Mesh> newMesh(new Mesh);
     newMesh->name = mesh->mName.length != 0 ? mesh->mName.C_Str() : "";
-    newMesh->indexOffset = m_indices.size();
-    unsigned int indexCountBefore = m_indices.size();
     int vertindexoffset = m_vertices.size()/3;
 
     // Get Vertices
@@ -137,12 +128,12 @@ QSharedPointer<Mesh> ModelLoader::processMesh(aiMesh *mesh)
         m_indices.push_back(face->mIndices[1]+vertindexoffset);
         m_indices.push_back(face->mIndices[2]+vertindexoffset);
 
-        newMesh->m_indices.push_back(face->mIndices[0]/*+vertindexoffset*/);
-        newMesh->m_indices.push_back(face->mIndices[1]/*+vertindexoffset*/);
-        newMesh->m_indices.push_back(face->mIndices[2]/*+vertindexoffset*/);
+        newMesh->m_indices.push_back(face->mIndices[0]);
+        newMesh->m_indices.push_back(face->mIndices[1]);
+        newMesh->m_indices.push_back(face->mIndices[2]);
     }
 
-    newMesh->indexCount = m_indices.size() - indexCountBefore;
+
     newMesh->material = m_materials.at(mesh->mMaterialIndex);
 
     return newMesh;
@@ -193,16 +184,10 @@ QSharedPointer<MaterialInfo> ModelLoader::processMaterial(aiMaterial *material)
 void ModelLoader::processNode(const aiScene *scene, aiNode *node, Node *parentNode, Node &newNode)
 {
     newNode.name = node->mName.length != 0 ? node->mName.C_Str() : "";
-    //std::cout<< newNode.name.toStdString()<<std::endl;
     newNode.transformation = QMatrix4x4(node->mTransformation[0]);
-
-    //qDebug()<<newNode.transformation;
-    //QThread::sleep(10);
-    //std::cout<< newNode.transformation.column(0).z()<<std::endl;
     newNode.nbMeshes = node->mNumMeshes;
     newNode.meshes.resize(node->mNumMeshes);
 
-    //M_MESH EMPTY
     for (uint imesh = 0; imesh < node->mNumMeshes; ++imesh)
     {
         QSharedPointer<Mesh> mesh = m_meshes[node->mMeshes[imesh]];
